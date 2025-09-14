@@ -10,3 +10,13 @@ body {
 }
 /* Smooth fonts */
 html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+}
+
+/* Make the shared element eligible; the class provides the name */
+.vt-composer {
+    view-transition-name: composer;
+}

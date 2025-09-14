@@ -8,7 +8,7 @@ const props = withDefaults(defineProps<{
 
 <template>
   <a :href="href"
-     class="px-3 py-2 text-sm font-semibold transition-opacity"
+     class="px-3 py-2 text-m font-semibold transition-opacity"
      :class="active ? 'text-ink' : 'text-ink/60 hover:text-ink'">
     <slot />
   </a>
