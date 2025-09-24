@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { nextTick, onMounted, ref, watch } from 'vue'
 import ChatBubble from './ChatBubble.vue'
-import {ChatMessage} from "../../models/Chat";
+import {ChatMessage} from "../../../models/Chat";
 
 const props = defineProps<{
   messages: ChatMessage[]

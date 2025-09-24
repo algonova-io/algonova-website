@@ -1,10 +1,10 @@
 
 <script setup lang="ts">
-import SiteNav from './components/SiteNav.vue'
-import HeroSection from './components/HeroSection.vue'
-import BackgroundLogo from "./components/BackgroundLogo.vue";
+import SiteNav from './components/core/SiteNav.vue'
+import HeroSection from './components/home/hero/HeroSection.vue'
+import BackgroundLogo from "./components/core/BackgroundLogo.vue";
 import {ref} from "vue";
-import ChatScreen from "./components/chat/ChatScreen.vue";
+import ChatScreen from "./components/home/chat/ChatScreen.vue";
 
 const isChat = ref(false)
 const draftText = ref<string>('') // optional: carry the user’s first input
@@ -29,26 +29,21 @@ function startChatFromHero(text: string) {
         :chat-active="isChat"
         @close="isChat = false"
     />
-    <Transition
-        mode="out-in"
-        enter-active-class="transition duration-200 ease-out"
-        enter-from-class="opacity-0 translate-y-2"
-        enter-to-class="opacity-100 translate-y-0"
-        leave-active-class="transition duration-150 ease-in"
-        leave-from-class="opacity-100 translate-y-0"
-        leave-to-class="opacity-0 -translate-y-2"
-    >
-      <HeroSection
-          v-if="!isChat"
-          key="hero"
-          @start-chat="startChatFromHero"
-      />
-      <ChatScreen
-          v-else
-          key="chat"
-          :initial-text="draftText"
-      />
-    </Transition>
+
+
+    <RouterView v-slot="{ Component }">
+      <Transition
+          mode="out-in"
+          enter-active-class="transition duration-200 ease-out"
+          enter-from-class="opacity-0 translate-y-2"
+          enter-to-class="opacity-100 translate-y-0"
+          leave-active-class="transition duration-150 ease-in"
+          leave-from-class="opacity-100 translate-y-0"
+          leave-to-class="opacity-0 -translate-y-2">
+        <component :is="Component"
+                   v-model:chat-active="isChat"/>
+      </Transition>
+    </RouterView>
   </div>
 </template>
 

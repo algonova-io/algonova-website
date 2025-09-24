@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ChatOptionPill from './ChatOptionPill.vue'
-import {ChatOption} from "../../models/Chat";
+import {ChatOption} from "../../../models/Chat";
 
 const emit = defineEmits<{ (e: 'select', option: ChatOption): void }>()
 const props = defineProps<{

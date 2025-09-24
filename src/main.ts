@@ -1,11 +1,12 @@
 import {createApp} from 'vue'
 import App from './App.vue'
-import './style.css'
+import './style.scss'
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import {faArrowUp, faCircleChevronDown} from "@fortawesome/free-solid-svg-icons";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import index from "./router";
 
 library.add(faArrowUp,faCircleChevronDown)
 const firebaseConfig = {
@@ -24,4 +25,5 @@ const analytics = getAnalytics(app);
 
 createApp(App)
     .component('font-awesome-icon', FontAwesomeIcon)
+    .use(index)
     .mount('#app')

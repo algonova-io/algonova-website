@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import {Sender} from "../../models/Chat";
+import {Sender} from "../../../models/Chat";
 
 const props = withDefaults(defineProps<{
   sender: Sender

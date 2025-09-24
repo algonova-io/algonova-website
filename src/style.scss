@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$bg-image: "assets/algonova_icon_background.svg";
+
+body {
+  background: {
+    image: url(#{$bg-image});
+    repeat: no-repeat;
+    position: right 100% top -5%;
+    size: 1200px; // or cover
+  }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// View transition
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+// Shared element
+.vt-composer {
+  view-transition-name: composer;
+}

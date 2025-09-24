@@ -5,12 +5,38 @@ import NavLink from './NavLink.vue'
 import PrimaryButton from './PrimaryButton.vue'
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {onMounted, ref} from "vue";
+import {RouteRecordName, useRoute, useRouter} from "vue-router";
 defineProps<{
   chatActive:boolean
 }>()
 const emit = defineEmits<{
   (e: 'close'): void
 }>()
+
+const route = useRoute();
+const router = useRouter();
+
+function toLabel(name: RouteRecordName | null | undefined) {
+  if (!name) return 'Home';
+  const s = typeof name === 'string' ? name : String(name);
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+const links = ref([
+  {href: 'Home', active: false},
+  {href: 'About', active: false},
+  {href: 'Projects', active: false},
+])
+
+function setActiveLink(href: string) {
+  links.value = links.value.map(link => ({...link, active: link.href === href}))
+}
+
+onMounted (async () => {
+  await router.isReady()
+  setActiveLink( toLabel(route.name))
+})
 
 </script>
 
@@ -25,9 +51,8 @@ const emit = defineEmits<{
       <div v-if="!chatActive" class="flex items-center justify-end gap-6">
 
         <div  class="hidden md:flex items-center gap-2">
-          <NavLink class="text-[21px]" href="#" active>Home</NavLink>
-          <NavLink class="text-[21px]" href="#">About</NavLink>
-          <NavLink class="text-[21px]" href="#">Projects</NavLink>
+          <NavLink v-for="link in links" @click="setActiveLink(link.href)" class="text-[21px]" :href="link.href" :active="link.active">
+            {{ link.href }}</NavLink>
         </div>
         <div class="flex-1"></div>
         <PrimaryButton as="a" href="#">Get in touch</PrimaryButton>

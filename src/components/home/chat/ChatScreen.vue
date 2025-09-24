@@ -2,8 +2,8 @@
 import {ref} from 'vue'
 import ChatThread from './ChatThread.vue'
 import ChatOptions from './ChatOptions.vue'
-import {ChatMessage, ChatOption} from "../../models/Chat";
-import ProjectInput from "../ProjectInput.vue";
+import {ChatMessage, ChatOption} from "../../../models/Chat";
+import ProjectInput from "../../core/ProjectInput.vue";
 
 
 /** Mock conversation to match your screenshot */
