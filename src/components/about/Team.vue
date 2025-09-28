@@ -42,23 +42,21 @@ technology to its limits.`,
 </script>
 
 <template>
-  <section aria-labelledby="team-heading"  class="relative w-full ">
-    <BackgroundShape class="text-accent -z-10"
-                     :d="ribbonInitial"
-                     :morphTargets="[ribbonInitial]"
-                     :strokeWidth="1"
-                     fill="white"
-                     :points="[
-        { x: 0,   y: 500 },  // start of your diagonal/polyline
-        { x: 400, y: 130 },  // end (or add more points for a bent line)
-        { x: 740, y: 420 },  // end (or add more points for a bent line)
-        { x: 440, y: 1200 },  // end (or add more points for a bent line)
-      ]"
+  <section aria-labelledby="team-heading"  class="relative w-full bg-white">
+<!--    <BackgroundShape class="text-accent -z-10"-->
+<!--                     :strokeWidth="1"-->
+<!--                     fill="white"-->
+<!--                     :points="[-->
+<!--        { x: 0,   y: 500 },  // start of your diagonal/polyline-->
+<!--        { x: 400, y: 130 },  // end (or add more points for a bent line)-->
+<!--        { x: 740, y: 420 },  // end (or add more points for a bent line)-->
+<!--        { x: 440, y: 1200 },  // end (or add more points for a bent line)-->
+<!--      ]"-->
 
-                     :autoMorph="true"
-    />
+<!--                     :autoMorph="true"-->
+<!--    />-->
 
-    <div class="mx-auto max-w-6xl px-6  py-14 " style="height: 100vh">
+    <div class="mx-auto max-w-6xl px-6  py-14 " >
       <!-- Heading -->
       <header class="max-w-6xl">
         <h2 id="team-heading" class="text-title-large text-ink">

@@ -11,20 +11,21 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <article class="grid grid-cols gap-4 md:gap-6 items-start">
-    <div class="grid-cols grid">
-      <figure class="relative">
-        <img
-            :src="photo"
-            :alt="alt || name"
-            class="object-cover grayscale w-full"
-            style=" width: 200px"
-            loading="lazy"
-        />
-      </figure>
-
-      <div class="min-w-0">
-        <h3 class="text-title-large leading-tight text-ink">
+  <article class=" d-flex flex-column gap-4 md:gap-6 items-start">
+    <div class="grid-cols-12 grid gap-6 justify-start items-start">
+      <div class="col-span-4">
+        <figure class="relative ">
+          <img
+              :src="photo"
+              :alt="alt || name"
+              class="object-cover grayscale w-full"
+              style=" width: 200px"
+              loading="lazy"
+          />
+        </figure>
+      </div>
+      <div class="col-span-8">
+        <h3 class="text-title-large  text-ink" style="line-height: 40px">
           {{ name }}
         </h3>
         <p class="text-title-small font-semibold text-ink mt-1">

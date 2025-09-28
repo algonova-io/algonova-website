@@ -2,7 +2,7 @@
 <template>
   <div class="mt-24 flex flex-col items-center gap-6 text-ink/60">
     <span>Or get to know us first</span>
-      <font-awesome-icon class="text-ink" :icon="faArrowDown" />
+      <font-awesome-icon class="text-ink animate-float" :icon="faArrowDown" />
   </div>
 </template>
 <style scoped>

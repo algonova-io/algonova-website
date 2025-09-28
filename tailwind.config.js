@@ -8,13 +8,13 @@ export default {
         accent: '#F2545B',
         ink: '#101010',
         secondaryText: '#3D3D3D',
-        soft: '#f6f7f8',
+        soft: '#f4f4f9',
       },
       fontFamily: {
         suse: ['"SUSE"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        'title-large':  ['49px', { lineHeight: '1.2', fontWeight: '700' }],
+        'title-large':  ['49px', { lineHeight: '49px', fontWeight: '700' }],
         'title-medium': ['31px', { lineHeight: '1.25', fontWeight: '700' }],
         'title-small':  ['25px', { lineHeight: '1.3', fontWeight: '700' }],
 
@@ -24,8 +24,8 @@ export default {
       },
       keyframes: {
         float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%':      { transform: 'translateY(-5%)' } // tweak lift here
+          '0%, 100%': { transform: 'translateY(20%)' },
+          '50%':      { transform: 'translateY(-20%)' } // tweak lift here
         },
       },
 
