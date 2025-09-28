@@ -29,8 +29,6 @@ function startChatFromHero(text: string) {
         :chat-active="isChat"
         @close="isChat = false"
     />
-
-
     <RouterView v-slot="{ Component }">
       <Transition
           mode="out-in"

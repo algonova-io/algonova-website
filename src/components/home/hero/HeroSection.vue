@@ -1,9 +1,9 @@
-
 <script setup lang="ts">
 import ProjectInput from '../../core/ProjectInput.vue'
 import ScrollCue from '../../core/ScrollCue.vue'
 import BackgroundLogo from "../../core/BackgroundLogo.vue";
 import {ref} from "vue";
+
 const emit = defineEmits<{
   (e: 'start-chat', text: string): void
 }>()
@@ -14,22 +14,29 @@ function onSubmit(value: string) {
 </script>
 
 <template>
-  <section class="relative hero-background ">
-    <div class="mx-auto flex flex-col max-w-6xl min-h-screen px-6 pt-10 pb-24">
-      <div class="mt-12 max-w-3xl">
-        <h1 class="text-5xl font-extrabold leading-tight text-ink">
-          We turn your ideas into
-        </h1>
-        <p class="mt-2 text-5xl font-extrabold leading-tight">
-          <span class="text-accent">market ready solutions.</span>
-        </p>
-      </div>
+  <section>
+    <div class="mx-auto flex flex-col max-w-6xl justify-space-between px-6" style="height: 90vh">
+      <div style="height:50vh" class="flex flex-col justify-center">
+        <div class="max-w-3xl">
+          <h1 class="text-ink text-title-large">
+            We turn your ideas into
+          </h1>
+          <p class="mt-2">
+            <span class="text-accent text-title-large">market ready solutions.</span>
+          </p>
+        </div>
 
-      <div class="mt-20 vt-composer">
-        <ProjectInput @submit="onSubmit" />
+        <div class="vt-composer flex w-full flex-col items-center mt-14 justify-center">
+          <ProjectInput @submit="onSubmit"/>
+          <p class="text-body-large mt-6 font-semibold">Our Ai assistant will guide you to a quick project estimate
+            ✨</p>
+        </div>
+
       </div>
       <div class="flex-1"></div>
-      <ScrollCue class="mb-20"/>
+      <ScrollCue/>
+      <div class="flex-1"></div>
+
     </div>
   </section>
 </template>

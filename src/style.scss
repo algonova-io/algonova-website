@@ -3,16 +3,19 @@
 @tailwind utilities;
 
 $bg-image: "assets/algonova_icon_background.svg";
+$bg-image-about: "assets/background-about.svg";
 
 body {
-  background: {
-    image: url(#{$bg-image});
-    repeat: no-repeat;
-    position: right 100% top -5%;
-    size: 1200px; // or cover
-  }
+background-color: #F8F9FA;
 }
+.about-background {
+ background: {
+   image: url(#{$bg-image-about});
+   repeat: no-repeat;
+   size: 1000px;
+ }
 
+}
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

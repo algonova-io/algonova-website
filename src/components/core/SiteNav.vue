@@ -41,10 +41,10 @@ onMounted (async () => {
 </script>
 
 <template>
-  <header class="sticky top-0 z-20 bg-gradient-to-t from-soft/10 to-accent/10">
-    <nav class="mx-auto grid max-w-6xl   grid-cols-2 items-center px-6 py-5 rounded">
+  <header class="sticky top-0 z-20">
+    <nav class="mx-auto grid max-w-6xl   grid-cols-2 items-center px-6 py-5 rounded backdrop-blur">
       <div class="flex items-center">
-        <LogoMark :size="180" />
+        <LogoMark :size="200" />
       </div>
       <!-- Right cell: nav links + CTA -->
 
@@ -54,7 +54,7 @@ onMounted (async () => {
           <NavLink v-for="link in links" @click="setActiveLink(link.href)" class="text-[21px]" :href="link.href" :active="link.active">
             {{ link.href }}</NavLink>
         </div>
-        <div class="flex-1"></div>
+
         <PrimaryButton as="a" href="#">Get in touch</PrimaryButton>
       </div>
       <div v-else class="flex items-center justify-end">

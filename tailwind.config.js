@@ -5,12 +5,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        accent: '#FF5A5F',
+        accent: '#F2545B',
         ink: '#101010',
         soft: '#f6f7f8',
       },
       fontFamily: {
         suse: ['"SUSE"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        'title-large':  ['49px', { lineHeight: '1.2', fontWeight: '700' }],
+        'title-medium': ['31px', { lineHeight: '1.25', fontWeight: '700' }],
+        'title-small':  ['25px', { lineHeight: '1.3', fontWeight: '700' }],
+
+        'body-large':   ['16px', { lineHeight: '19spx', fontWeight: '400' }],
+        'body-medium':  ['13px', { lineHeight: '17px', fontWeight: '400' }],
+        'body-small':   ['10px', { lineHeight: '14px', fontWeight: '400' }],
       },
       keyframes: {
         float: {
@@ -25,7 +34,6 @@ export default {
       animation: {
         float: 'float 2s ease-in-out infinite',
       },
-
     },
   },
   plugins: [],
