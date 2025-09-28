@@ -10,7 +10,6 @@ import index from "./router";
 
 library.add(faArrowUp,faCircleChevronDown)
 const firebaseConfig = {
-    apiKey: "AIzaSyDkEBS5KYvG3S2_iN6_yqFchTuQJHEplj4",
     authDomain: "algonova-2837d.firebaseapp.com",
     projectId: "algonova-2837d",
     storageBucket: "algonova-2837d.firebasestorage.app",
