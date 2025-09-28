@@ -14,7 +14,7 @@ type Member = {
 
 const members: Member[] = [
   {
-    photo: '/src/assets/vitalii.png',
+    photo: '../../assets/vitalii.png',
     name: 'Kenidiid',
     role: 'Product Engineer',
     quote: "If it doesn’t feel good to use, it’s not finished",
@@ -26,7 +26,7 @@ joys in an interaction, Kenidiid is driven by creating products that delight as 
     alt: 'Portrait of Kenidiid'
   },
   {
-    photo: '/src/assets/vitalii.png',
+    photo: '../../assets/vitalii.png',
     name: 'Vitalii',
     role: 'Software Engineer',
     quote: 'Challenges are what make building fun',
