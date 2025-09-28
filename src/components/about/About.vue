@@ -99,13 +99,24 @@ const ribbonWork =
             <IllustrationSpace/>
           </div>
         </div>
-        <div class="grid grid-cols-12 gap-12 mt-10">
-          <div class="col-span-4 flex items-start justify-end mt-14">
-            <h1 class="text-title-large " style="width:220px">Why Algonova</h1>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mt-10">
+          <!-- Heading -->
+          <div
+              class="md:col-span-4 order-1 md:order-none
+           flex md:items-start md:justify-end
+           mt-4 md:mt-14"
+          >
+            <h1 class="text-title-large text-center md:text-left md:w-[220px]">
+              Why Algonova
+            </h1>
           </div>
 
           <!-- Feature grid -->
-          <div class="col-span-8 mt-10 grid gap-12 sm:grid-cols-2 justify-end">
+          <div
+              class="md:col-span-8 order-2
+           mt-6 md:mt-10
+           grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-12"
+          >
             <FeatureCard
                 v-for="(f, i) in features"
                 :key="i"
