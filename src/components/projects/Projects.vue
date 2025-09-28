@@ -49,7 +49,7 @@ const infitColor = '#005D7E'
         >
           <template #art>
             <!-- Oversized right-side wordmark matching the reference -->
-            <img src="/src/assets/infit.svg" alt="" class="fill-height"/>
+            <img src="../../assets/InFit.svg" alt="" class="fill-height"/>
           </template>
         </ProjectCard>
       </div>
