@@ -7,6 +7,7 @@ export default {
       colors: {
         accent: '#F2545B',
         ink: '#101010',
+        secondaryText: '#3D3D3D',
         soft: '#f6f7f8',
       },
       fontFamily: {
@@ -17,8 +18,8 @@ export default {
         'title-medium': ['31px', { lineHeight: '1.25', fontWeight: '700' }],
         'title-small':  ['25px', { lineHeight: '1.3', fontWeight: '700' }],
 
-        'body-large':   ['16px', { lineHeight: '19spx', fontWeight: '400' }],
-        'body-medium':  ['13px', { lineHeight: '17px', fontWeight: '400' }],
+        'body-large':   ['20px', { lineHeight: '28px', fontWeight: '400' }],
+        'body-medium':  ['17px', { lineHeight: '22px', fontWeight: '400' }],
         'body-small':   ['10px', { lineHeight: '14px', fontWeight: '400' }],
       },
       keyframes: {

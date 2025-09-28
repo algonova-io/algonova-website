@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import FeatureCard from './FeatureCard.vue'
 import DecorativeStroke from './DecorativeStroke.vue'
-import IllustrationSpace from './IllustrationSpace.vue'
+import IllustrationSpace from './components/IllustrationSpace.vue'
 import BackgroundShape from "../core/BackgroundShape.vue";
+import Team from "./Team.vue";
 
 type Feature = {
   icon: string
@@ -51,68 +52,73 @@ const ribbonWork =
 </script>
 
 <template>
-  <section
-      aria-labelledby="about-heading"
-      class="relative w-full"
-
-  >
-    <BackgroundShape class="text-accent -z-10"
-                     :d="ribbonInitial"
-                     :morphTargets="[ribbonInitial]"
-                     :strokeWidth="1"
-                     fill="white"
-                     :points="[
-        { x: 0,   y: 320 },  // start of your diagonal/polyline
-        { x: 360, y: 440 },  // end (or add more points for a bent line)
-        { x: 320, y: 1200 },  // end (or add more points for a bent line)
+  <div class="relative w-full">
+    <section
+        aria-labelledby="about-heading"
+        class="relative w-full"
+    >
+      <BackgroundShape class="text-accent -z-10"
+                       :d="ribbonInitial"
+                       :morphTargets="[ribbonInitial]"
+                       :strokeWidth="1"
+                       fill="white"
+                       :points="[
+        { x: 0,   y: 260 },  // start of your diagonal/polyline
+        { x: 300, y: 440 },  // end (or add more points for a bent line)
+        { x: 240, y: 1200 },  // end (or add more points for a bent line)
       ]"
 
-                     :autoMorph="false"
-    />
+                       :autoMorph="true"
+      />
 
-    <!-- Decorative diagonal stroke -->
-    <!--    <DecorativeStroke class="hidden md:block" :strokeWidth="1" />-->
 
-    <div class=" mx-auto max-w-6xl px-6 py-14">
-      <div class="grid items-start gap-10 md:gap-12 lg:gap-16 md:grid-cols-2">
-        <!-- Left: Hero text -->
-        <div class="d-flex flex-column">
-          <h2 id="about-heading" class="text-title-large  text-ink">
-            Ship the first version people
-            <span class="text-accent">love</span>.
-          </h2>
-          <div class="flex-1"></div>
-          <p class="text-body-large font-semibold text-ink mt-14 max-w-prose">
-            Algonova partners with non-technical founders to design and build beautiful, market-ready mobile & web apps
-            fast. We handle product, design, and development end-to-end so you can validate sooner and grow with
-            confidence. </p>
-          <div class="flex-1"></div>
+      <!-- Decorative diagonal stroke -->
+      <!--    <DecorativeStroke class="hidden md:block" :strokeWidth="1" />-->
 
+      <div class=" mx-auto max-w-6xl px-6 py-14">
+        <div class="grid items-start gap-10 md:gap-12 lg:gap-16 md:grid-cols-2">
+          <!-- Left: Hero text -->
+          <div class="d-flex flex-column">
+            <h2 id="about-heading" class="text-title-large  text-ink">
+              Ship the first version people
+              <span class="text-accent">love</span>.
+            </h2>
+            <div class="flex-1"></div>
+            <p class="text-body-large font-weight-medium text-ink mt-14 max-w-prose">
+              Algonova partners with non-technical founders to design and build beautiful, market-ready mobile & web
+              apps
+              fast. We handle product, design, and development end-to-end so you can validate sooner and grow with
+              confidence. </p>
+            <div class="flex-1"></div>
+
+          </div>
+
+          <!-- Right: Illustration -->
+          <div class="d-flex flex-column items-end justify-self-end">
+            <IllustrationSpace/>
+          </div>
         </div>
+        <div class="grid grid-cols-12 gap-12 mt-10">
+          <div class="col-span-4 flex items-start justify-end mt-14">
+            <h1 class="text-title-large " style="width:220px">Why Algonova</h1>
+          </div>
 
-        <!-- Right: Illustration -->
-        <div class="order-1 md:order-2 flex md:justify-end">
-          <IllustrationSpace/>
+          <!-- Feature grid -->
+          <div class="col-span-8 mt-10 grid gap-12 sm:grid-cols-2 justify-end">
+            <FeatureCard
+                v-for="(f, i) in features"
+                :key="i"
+                :icon="f.icon"
+                :alt="f.alt"
+                :title="f.title"
+                :body="f.body"
+            />
+          </div>
         </div>
       </div>
-      <div class="grid grid-cols-12 gap-4 mt-10">
-        <div class="col-span-6 flex items-start justify-center mt-14">
-          <h1 class="text-title-large " style="width:220px">Why Algonova</h1>
-        </div>
-        <!-- Feature grid -->
-        <div class="col-span-6 mt-10 grid gap-8 sm:grid-cols-2">
-          <FeatureCard
-              v-for="(f, i) in features"
-              :key="i"
-              :icon="f.icon"
-              :alt="f.alt"
-              :title="f.title"
-              :body="f.body"
-          />
-        </div>
+    </section>
+    <Team/>
 
-      </div>
+  </div>
 
-    </div>
-  </section>
 </template>

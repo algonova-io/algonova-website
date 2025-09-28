@@ -4,7 +4,7 @@
 
 <template>
   <figure
-      class="relative mx-auto w-[220px] sm:w-[160px] md:w-[340px] lg:w-[380px]"
+      class="relative  w-[220px] sm:w-[160px] md:w-[340px] lg:w-[380px]"
   >
     <img
         src="/src/assets/slang-to-the-moon.svg"

@@ -9,9 +9,9 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <article
-      class="group  bg-white ring-1 ring-black/5 drop-shadow-card py-4 px-6 h-full
-           transition hover:shadow-md hover:ring-black/10"
+  <div
+      class="group  bg-white py-4 px-6 h-full
+           "
   >
     <div class="flex flex-col justify-center items-center gap-4">
       <img
@@ -29,5 +29,5 @@ const props = defineProps<Props>()
         </p>
       </div>
     </div>
-  </article>
+  </div>
 </template>
