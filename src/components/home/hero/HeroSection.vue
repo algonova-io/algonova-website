@@ -40,10 +40,17 @@ function onSubmit(value: string) {
           </p>
         </div>
 
-        <div class="vt-composer flex w-full flex-col items-center mt-14 justify-center">
+        <div class="vt-composer flex w-full flex-col items-start mt-14 gap-4 justify-center">
           <ProjectInput @submit="onSubmit"/>
-          <p class="text-body-large mt-6 font-semibold">Our Ai assistant will guide you to a quick and free project estimate
-            ✨</p>
+          <div class="ms-2 flex flex-row justify-bottom items-start">
+            <img src="/src/assets/Arrow_04.svg" style="height: 60px" class="me-4">
+            <div class="mt-4 gap-0 flex-row flex items-start ">
+              <span class="text-body-large mt-6 font-semibold" >Our AI assistant will turn your idea into a clear plan — and a free estimate in minutes.
+                </span>
+            </div>
+            <img class="mt-6 mx-6" src="/src/assets/smiley_drawing.svg" style="height: 60px">
+
+          </div>
         </div>
 
       </div>
