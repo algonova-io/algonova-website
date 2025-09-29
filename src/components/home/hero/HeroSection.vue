@@ -15,8 +15,8 @@ function onSubmit(value: string) {
 </script>
 
 <template>
-  <section>
-    <div class="mx-auto flex flex-col max-w-6xl justify-space-between px-6" style="height: 90vh">
+  <section id="home">
+    <div class="mx-auto flex flex-col max-w-6xl  justify-space-between px-6" style="height: 90vh">
       <div style="height:50vh" class="flex flex-col justify-center">
         <div class="max-w-3xl">
           <h1 class="text-ink text-title-large">

@@ -105,15 +105,15 @@ watch(() => props.words, () => {
 
 <template>
   <!-- Use currentColor so parent text color controls the component -->
-  <span class="inline-flex items-baseline">
-    <span class="whitespace-pre">{{ displayText }}</span>
-    <!-- Cursor -->
-    <span
+  <span class="inline-flex items-baseline h-[100px] md:h-auto">
+    <span class="whitespace-normal">{{ displayText }}<span
         aria-hidden="true"
         class="ml-1 inline-block w-[1px] -translate-y-[1px] text-accent"
         style="font-weight: normal"
         :class="{ 'animate-blink': isIdle }"
-    >|</span>
+    >|</span></span>
+    <!-- Cursor -->
+
   </span>
 </template>
 

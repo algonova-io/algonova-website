@@ -8,7 +8,7 @@ const infitColor = '#005D7E'
 </script>
 
 <template>
-  <section aria-labelledby="projects-heading"  class="relative w-full">
+  <section aria-labelledby="projects-heading"  id="projects" class="relative w-full">
     <div class="mx-auto max-w-6xl px-6  py-14 " style="height: 100vh">
       <!-- Heading -->
       <header class="max-w-6xl">

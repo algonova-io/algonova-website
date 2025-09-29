@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import {lockSpy} from "../components/core/utils";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -16,17 +17,50 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/projects',
         name: 'projects',
+
         component: () => import('../components/projects/Projects.vue'),
-        meta: { title: 'Projects' },
+        meta: { title: 'Projects'  },
     },
     { path: '/:pathMatch(.*)*', redirect: { name: 'home' } },
 ];
+let fromSpy = false
+
+export function setFromSpy(v: boolean) { fromSpy = v }
 
 const index = createRouter({
     history: createWebHistory(),
     routes,
-    scrollBehavior(_, __, saved) {
-        return saved ?? { top: 0 };
+    scrollBehavior(to, from, saved) {
+        if (saved) return saved
+
+        // If the spy updated the hash, do NOT scroll again.
+        if (to.state && (to.state as any).fromSpy) return false
+
+        if (to.hash) {
+            return new Promise(resolve => {
+                requestAnimationFrame(() => {
+                    const el = document.querySelector(to.hash) as HTMLElement | null
+                    if (!el) return resolve({ top: 0 })
+
+                    const headerOffset = 88 // your sticky header height
+                    const y = el.getBoundingClientRect().top + window.scrollY - headerOffset
+
+                    // Lock the spy while we scroll
+                    lockSpy()
+
+                    window.scrollTo({ top: y, behavior: 'smooth' })
+
+                    // Best-effort unlock if scrollend isn’t supported
+                    window.addEventListener('scrollend', () => lockSpy(0), { once: true })
+                    setTimeout(() => lockSpy(0), 800) // fallback timeout
+
+                    resolve(false) // we handled it manually
+                })
+            })
+        }
+
+        return { top: 0, behavior: 'smooth' }
+
     },
     linkActiveClass: 'index-active',
     linkExactActiveClass: 'index-exact',

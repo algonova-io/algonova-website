@@ -68,6 +68,7 @@ const ribbonWork =
 <!--    />-->
 
     <section
+        id="about"
         aria-labelledby="about-heading"
         class="relative w-full"
     >
