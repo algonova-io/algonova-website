@@ -1,14 +1,19 @@
 
 <script setup lang="ts">
-import SiteNav from './components/core/SiteNav.vue'
-import HeroSection from './components/home/hero/HeroSection.vue'
-import BackgroundLogo from "./components/core/BackgroundLogo.vue";
+import SiteNav from './components/SiteNav.vue'
 import {ref} from "vue";
-import ChatScreen from "./components/home/chat/ChatScreen.vue";
+import { useScrollPageRouter} from "./composables/useScrollPageRouter";
+import {routes} from "./router/router";
 
 const isChat = ref(false)
 const draftText = ref<string>('') // optional: carry the user’s first input
 
+useScrollPageRouter(routes.map(r => r.name).filter(Boolean)
+    , {
+  thresholdPx: 12,
+  debounceMs: 700,
+  enableKeys: true,
+});
 function startChatFromHero(text: string) {
   draftText.value = text
 

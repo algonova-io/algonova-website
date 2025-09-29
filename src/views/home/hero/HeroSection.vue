@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import ProjectInput from '../../core/ProjectInput.vue'
-import ScrollCue from '../../core/ScrollCue.vue'
-import BackgroundLogo from "../../core/BackgroundLogo.vue";
+import ProjectInput from '../../../components/ProjectInput.vue'
+import ScrollCue from '../../../components/ScrollCue.vue'
+import BackgroundLogo from "../../../components/BackgroundLogo.vue";
 import {ref} from "vue";
 import TypeWriter from "../TypeWriter.vue";
 
