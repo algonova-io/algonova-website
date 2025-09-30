@@ -84,9 +84,12 @@ function observeSection(selector: '#home'|'#about'|'#projects') {
       el,
       (entries: any) => {
         if (!shouldObserverBeActive.value) {
-
+          console.log("shouldObserverBeActive is false")
           return
         }
+
+        console.log("shouldObserverBeActive is true")
+
         const e = entries[0]
         if (!e?.isIntersecting) return
         const targetHash = selector
@@ -95,11 +98,13 @@ function observeSection(selector: '#home'|'#about'|'#projects') {
         if ((route.hash || '') === targetHash) return
 
         // Update only the hash, tell scrollBehavior to skip
-        lockSpy(+1)
-        setFromSpy(true)
+        // lockSpy(+1)
+        // setFromSpy(true)
         router.replace({ hash: targetHash,})
             .finally(() => {
-              lockSpy(-1)
+              shouldObserverBeActive.value = true
+
+              //  lockSpy(-1)
             })
       },
       {

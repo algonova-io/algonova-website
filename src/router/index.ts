@@ -32,17 +32,20 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
     scrollBehavior(to, from, saved) {
-        if (saved) return saved
+         if (saved) return saved
 
         // If the spy updated the hash, do NOT scroll again.
-        if (fromSpy) {
-            setFromSpy(false)
-            return false
-        }
+        console.log("Inside router callback animationframe")
+
+        // if (fromSpy) {
+        //     setFromSpy(false)
+        //     return false
+        // }
 
         if (to.hash) {
             return new Promise(resolve => {
                 requestAnimationFrame(() => {
+                    console.log("Inside router callback animationframe")
                     const el = document.querySelector(to.hash) as HTMLElement | null
                     if (!el) return resolve({ top: 0 })
 
@@ -50,15 +53,15 @@ const router = createRouter({
                     const y = el.getBoundingClientRect().top + window.scrollY - headerOffset
 
                     // Lock the spy while we scroll
-                    lockSpy()
+              //      lockSpy()
 
                     window.scrollTo({ top: y, behavior: 'smooth' })
 
                     // Best-effort unlock if scrollend isn’t supported
                     window.addEventListener('scrollend', () => lockSpy(0), { once: true })
                     setTimeout(() => lockSpy(0), 800) // fallback timeout
-
-                    shouldObserverBeActive.value = true
+                    console.log("Setting should observer be active to true")
+                //    shouldObserverBeActive.value = true
                     resolve(false) // we handled it manually
                 })
             })

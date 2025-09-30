@@ -38,8 +38,9 @@ function isLinkActive(hash: string) {
 }
 
 function runFunction(fn: () => void) {
-  fn()
+  console.log("Setting should observer be active to false")
   shouldObserverBeActive.value = false
+  fn()
 }
 </script>
 
