@@ -37,6 +37,7 @@ import GetQuoteFAB from '../core/GetQuoteFAB.vue'
 // ✅ Vuetify composable
 import { useIntersectionObserver } from '@vueuse/core'
 import {setFromSpy} from "../../router";
+import {shouldObserverBeActive} from "../core/compasebles/useAutoScroll";
 
 const chatActive = defineModel<boolean>('chatActive', { default: false })
 const draftText = ref('')
@@ -67,14 +68,25 @@ function scrollToHash(hash: string) {
 type StopFn = () => void
 const stops: StopFn[] = []
 
+watch(shouldObserverBeActive,
+    () => {
+  console.log(shouldObserverBeActive.value, " shouldObserverBeActive")
+})
+
+
 function observeSection(selector: '#home'|'#about'|'#projects') {
   const el = document.querySelector(selector)
   if (!el) return
+
 
   // Vuetify returns { stop }
   const { stop } = useIntersectionObserver(
       el,
       (entries: any) => {
+        if (!shouldObserverBeActive.value) {
+
+          return
+        }
         const e = entries[0]
         if (!e?.isIntersecting) return
         const targetHash = selector

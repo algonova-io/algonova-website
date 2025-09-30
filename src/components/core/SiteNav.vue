@@ -5,6 +5,7 @@ import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {RouteRecordName, useRoute, useRouter} from "vue-router";
 import {computed} from "vue";
+import {shouldObserverBeActive} from "./compasebles/useAutoScroll";
 
 defineProps<{
   chatActive: boolean
@@ -35,6 +36,11 @@ function isLinkActive(hash: string) {
   if (route.name !== 'home') return false
   return currentHash.value === hash
 }
+
+function runFunction(fn: () => void) {
+  fn()
+  shouldObserverBeActive.value = false
+}
 </script>
 
 <template>
@@ -51,7 +57,7 @@ function isLinkActive(hash: string) {
           <RouterLink :to="link.href" custom v-slot="{ href, navigate }">
             <a
                 :href="href"
-                @click="navigate"
+                @click="runFunction(navigate)"
                 :aria-current="isLinkActive(link.hash) ? 'page' : undefined"
                 :class="[
                 'px-3 py-2 text-m font-semibold transition-opacity',
