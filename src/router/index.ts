@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import {lockSpy} from "../components/core/utils";
+import {fromSpy, shouldObserverBeActive} from "../components/core/compasebles/useAutoScroll";
+import {ref} from "vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -23,18 +25,19 @@ const routes: RouteRecordRaw[] = [
     },
     { path: '/:pathMatch(.*)*', redirect: { name: 'home' } },
 ];
-let fromSpy = false
 
-export function setFromSpy(v: boolean) { fromSpy = v }
-
-const index = createRouter({
+const router = createRouter({
     history: createWebHistory(),
     routes,
     scrollBehavior(to, from, saved) {
         if (saved) return saved
 
         // If the spy updated the hash, do NOT scroll again.
-        if (to.state && (to.state as any).fromSpy) return false
+        console.log("is from spy", fromSpy.value)
+        if (fromSpy.value) {
+            fromSpy.value = false
+            return false
+        }
 
         if (to.hash) {
             return new Promise(resolve => {
@@ -66,9 +69,9 @@ const index = createRouter({
     linkExactActiveClass: 'index-exact',
 });
 
-index.beforeEach((to, _, next) => {
+router.beforeEach((to, _, next) => {
     if (to.meta?.title) document.title = `${to.meta.title} · App`;
     next();
 });
 
-export default index;
+export default router;

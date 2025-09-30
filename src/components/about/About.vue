@@ -67,8 +67,7 @@ const ribbonWork =
 <!--                     :autoMorph="true"-->
 <!--    />-->
 
-    <section
-        id="about"
+    <div
         aria-labelledby="about-heading"
         class="relative w-full"
     >
@@ -129,7 +128,7 @@ const ribbonWork =
           </div>
         </div>
       </div>
-    </section>
+    </div>
     <Team/>
 
   </div>
