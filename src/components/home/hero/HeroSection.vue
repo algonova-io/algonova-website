@@ -19,7 +19,7 @@ function onSubmit(value: string) {
     <div class="mx-auto flex flex-col max-w-6xl  justify-space-between px-6" style="height: 90vh">
       <div style="height:50vh" class="flex flex-col justify-center">
         <div class="max-w-3xl">
-          <h1 class="text-ink text-title-large">
+          <h1 class="text-ink text-title-large home-text">
             We turn your ideas into
           </h1>
           <p class="mt-2">
@@ -45,7 +45,7 @@ function onSubmit(value: string) {
           <div class="ms-2 flex flex-row justify-bottom items-start">
             <img src="/src/assets/Arrow_04.svg" style="height: 60px" class="me-4">
             <div class="mt-4 gap-0 flex-row flex items-start ">
-              <span class="text-body-large mt-6 font-semibold" >Our AI assistant will turn your idea into a clear plan — and a free estimate in minutes.
+              <span class="text-body-small md:text-body-large mt-6 font-semibold" >Our AI assistant will turn your idea into a clear plan — and a free estimate in minutes.
                 </span>
             </div>
             <img class="mt-6 mx-6" src="/src/assets/smiley_drawing.svg" style="height: 60px">
@@ -54,9 +54,9 @@ function onSubmit(value: string) {
         </div>
 
       </div>
-      <div class="flex-1"></div>
-      <ScrollCue/>
-      <div class="flex-1"></div>
+      <div class="absolute bottom-6 left-0 right-0  justify-center hidden md:flex">
+        <ScrollCue />
+      </div>
 
     </div>
   </section>

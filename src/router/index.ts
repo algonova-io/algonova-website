@@ -27,14 +27,17 @@ let fromSpy = false
 
 export function setFromSpy(v: boolean) { fromSpy = v }
 
-const index = createRouter({
+const router = createRouter({
     history: createWebHistory(),
     routes,
     scrollBehavior(to, from, saved) {
         if (saved) return saved
 
         // If the spy updated the hash, do NOT scroll again.
-        if (to.state && (to.state as any).fromSpy) return false
+        if (fromSpy) {
+            setFromSpy(false)
+            return false
+        }
 
         if (to.hash) {
             return new Promise(resolve => {
@@ -66,9 +69,9 @@ const index = createRouter({
     linkExactActiveClass: 'index-exact',
 });
 
-index.beforeEach((to, _, next) => {
+router.beforeEach((to, _, next) => {
     if (to.meta?.title) document.title = `${to.meta.title} · App`;
     next();
 });
 
-export default index;
+export default router;

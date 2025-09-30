@@ -4,6 +4,18 @@
 
 $bg-image: "assets/algonova_icon_background.svg";
 $bg-image-about: "assets/background-about.svg";
+$header-height: 80px;
+
+@media (max-width: 768px) {
+  .home-text {
+    padding-top: 220px
+  }
+}
+
+html {
+  scroll-padding-top: $header-height;
+  scroll-behavior: smooth;
+}
 
 body {
 background-color: #bfdbf7;

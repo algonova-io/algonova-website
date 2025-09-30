@@ -5,7 +5,7 @@ import {library} from '@fortawesome/fontawesome-svg-core'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import {faArrowUp, faCircleChevronDown} from "@fortawesome/free-solid-svg-icons";
 import {initializeApp} from "firebase/app";
-import index from "./router";
+import router from "./router";
 
 library.add(faArrowUp,faCircleChevronDown)
 const firebaseConfig = {
@@ -24,5 +24,5 @@ const app = initializeApp(firebaseConfig);
 
 createApp(App)
     .component('font-awesome-icon', FontAwesomeIcon)
-    .use(index)
+    .use(router)
     .mount('#app')
