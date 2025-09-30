@@ -70,7 +70,7 @@ const stops: StopFn[] = []
 
 watch(shouldObserverBeActive,
     () => {
-  console.log(shouldObserverBeActive.value, " shouldObserverBeActive")
+  console.log(shouldObserverBeActive.value, " shouldObserverBeActive watcher")
 })
 
 
@@ -83,7 +83,10 @@ function observeSection(selector: '#home'|'#about'|'#projects') {
   const { stop } = useIntersectionObserver(
       el,
       (entries: any) => {
+        console.log(shouldObserverBeActive.value, " shouldObserverBeActive in observeSection")
+
         if (!shouldObserverBeActive.value) {
+          shouldObserverBeActive.value = true
 
           return
         }

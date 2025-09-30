@@ -58,7 +58,6 @@ const router = createRouter({
                     window.addEventListener('scrollend', () => lockSpy(0), { once: true })
                     setTimeout(() => lockSpy(0), 800) // fallback timeout
 
-                    shouldObserverBeActive.value = true
                     resolve(false) // we handled it manually
                 })
             })
