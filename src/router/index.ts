@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import {lockSpy} from "../components/core/utils";
-import {shouldObserverBeActive} from "../components/core/compasebles/useAutoScroll";
+import {fromSpy, shouldObserverBeActive} from "../components/core/compasebles/useAutoScroll";
+import {ref} from "vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -24,9 +25,6 @@ const routes: RouteRecordRaw[] = [
     },
     { path: '/:pathMatch(.*)*', redirect: { name: 'home' } },
 ];
-let fromSpy = false
-
-export function setFromSpy(v: boolean) { fromSpy = v }
 
 const router = createRouter({
     history: createWebHistory(),
@@ -35,8 +33,9 @@ const router = createRouter({
         if (saved) return saved
 
         // If the spy updated the hash, do NOT scroll again.
-        if (fromSpy) {
-            setFromSpy(false)
+        console.log("is from spy", fromSpy.value)
+        if (fromSpy.value) {
+            fromSpy.value = false
             return false
         }
 

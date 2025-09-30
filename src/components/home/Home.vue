@@ -36,8 +36,8 @@ import GetQuoteFAB from '../core/GetQuoteFAB.vue'
 
 // ✅ Vuetify composable
 import { useIntersectionObserver } from '@vueuse/core'
-import {setFromSpy} from "../../router";
-import {shouldObserverBeActive} from "../core/compasebles/useAutoScroll";
+import {fromSpy, shouldObserverBeActive} from "../core/compasebles/useAutoScroll";
+import {tr} from "vuetify/locale";
 
 const chatActive = defineModel<boolean>('chatActive', { default: false })
 const draftText = ref('')
@@ -68,11 +68,6 @@ function scrollToHash(hash: string) {
 type StopFn = () => void
 const stops: StopFn[] = []
 
-watch(shouldObserverBeActive,
-    () => {
-  console.log(shouldObserverBeActive.value, " shouldObserverBeActive watcher")
-})
-
 
 function observeSection(selector: '#home'|'#about'|'#projects') {
   const el = document.querySelector(selector)
@@ -83,13 +78,12 @@ function observeSection(selector: '#home'|'#about'|'#projects') {
   const { stop } = useIntersectionObserver(
       el,
       (entries: any) => {
-        console.log(shouldObserverBeActive.value, " shouldObserverBeActive in observeSection")
-
         if (!shouldObserverBeActive.value) {
           shouldObserverBeActive.value = true
 
           return
         }
+        fromSpy.value = true
         const e = entries[0]
         if (!e?.isIntersecting) return
         const targetHash = selector
@@ -99,7 +93,6 @@ function observeSection(selector: '#home'|'#about'|'#projects') {
 
         // Update only the hash, tell scrollBehavior to skip
         lockSpy(+1)
-        setFromSpy(true)
         router.replace({ hash: targetHash,})
             .finally(() => {
               lockSpy(-1)
