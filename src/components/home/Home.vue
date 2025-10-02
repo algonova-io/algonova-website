@@ -76,10 +76,13 @@ function observeSection(selector: '#home'|'#about'|'#projects') {
 
   // Vuetify returns { stop }
   const { stop } = useIntersectionObserver(
-      el,
+      el as any,
       (entries: any) => {
         if (!shouldObserverBeActive.value) {
-          shouldObserverBeActive.value = true
+
+          setTimeout(() => {
+            shouldObserverBeActive.value = true
+          })
 
           return
         }

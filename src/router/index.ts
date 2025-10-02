@@ -29,42 +29,7 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
-    scrollBehavior(to, from, saved) {
-        if (saved) return saved
 
-        // If the spy updated the hash, do NOT scroll again.
-        console.log("is from spy", fromSpy.value)
-        if (fromSpy.value) {
-            fromSpy.value = false
-            return false
-        }
-
-        if (to.hash) {
-            return new Promise(resolve => {
-                requestAnimationFrame(() => {
-                    const el = document.querySelector(to.hash) as HTMLElement | null
-                    if (!el) return resolve({ top: 0 })
-
-                    const headerOffset = 88 // your sticky header height
-                    const y = el.getBoundingClientRect().top + window.scrollY - headerOffset
-
-                    // Lock the spy while we scroll
-                    lockSpy()
-
-                    window.scrollTo({ top: y, behavior: 'smooth' })
-
-                    // Best-effort unlock if scrollend isn’t supported
-                    window.addEventListener('scrollend', () => lockSpy(0), { once: true })
-                    setTimeout(() => lockSpy(0), 800) // fallback timeout
-
-                    resolve(false) // we handled it manually
-                })
-            })
-        }
-
-        return { top: 0, behavior: 'smooth' }
-
-    },
     linkActiveClass: 'index-active',
     linkExactActiveClass: 'index-exact',
 });
