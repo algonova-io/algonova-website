@@ -1,60 +1,42 @@
 <script setup lang="ts">
-import {ref} from 'vue'
+import {onMounted, ref} from 'vue'
 import ChatThread from './ChatThread.vue'
-import ChatOptions from './ChatOptions.vue'
-import {ChatMessage, ChatOption} from "../../../models/Chat";
+import {httpsCallable} from 'firebase/functions';
+import {ChatMessage} from "../../../models/Chat";
 import ProjectInput from "../../core/ProjectInput.vue";
+import {functions} from "../../../main";
 
+onMounted(() => {
 
+})
 /** Mock conversation to match your screenshot */
-const messages = ref<ChatMessage[]>([
-  {
-    id: 'm1',
-    sender: 'assistant',
-    text:
-        "Got it. Thanks for the context. To get started, could you tell me what type of project you're requesting a quote for? " +
-        'You can select one from the options below, or type in another.',
-    createdAt: new Date().toISOString(),
-  },
-  {
-    id: 'm2',
-    sender: 'user',
-    text: 'I have an idea for an app I want to get developed, perhaps an MVP to start with.',
-    createdAt: new Date().toISOString(),
-  },
-])
+const messages = ref<ChatMessage[]>([])
 
-const options = ref<ChatOption[]>([
-  { id: 'mobile', label: 'Mobile App' },
-  { id: 'api', label: 'API or Backend service' },
-  { id: 'web', label: 'Web App' },
-  { id: 'desktop', label: 'Desktop software' },
-  { id: 'integration', label: 'Integration with an existing system' },
-  { id: 'cross', label: 'Cross platform' },
-])
+async function handleSubmit(text: string) {
+  const sendMessage = httpsCallable(functions, "chat")
 
-const activeOptionId = ref<string | null>(null)
+  const { stream, data } = await sendMessage.stream({
+    text: text,
+    sessionId: "123456789"
+  });
 
-function handleOptionSelect(opt: ChatOption) {
-  activeOptionId.value = opt.id
-  // push a user message for visibility
-  messages.value = [
-    ...messages.value,
-    {
-      id: crypto.randomUUID(),
-      sender: 'user',
-      text: opt.label,
-      createdAt: new Date().toISOString(),
-    },
-  ]
+  for await (const messageChunk of stream) {
+    // update the UI every time a new chunk is received
+    // from the callable function
+    updateUi(messageChunk);
+  }
 }
 
-function handleSubmit(text: string) {
+function updateUi(messageChunk: any) {
   messages.value = [
     ...messages.value,
-    { id: crypto.randomUUID(), sender: 'user', text, createdAt: new Date().toISOString() },
+    ...messageChunk.messages.map((m: any) => ({
+      id: m.id,
+      sender: m.sender,
+      text: m.text,
+      createdAt: m.createdAt,
+    })),
   ]
-  // here you might call your API, then push an assistant response
 }
 </script>
 
@@ -66,13 +48,13 @@ function handleSubmit(text: string) {
       <ChatThread :messages="messages" />
 
       <!-- Options row (assistant quick picks) -->
-      <div class="mt-2">
-        <ChatOptions
-            :options="options"
-            :active-id="activeOptionId"
-            @select="handleOptionSelect"
-        />
-      </div>
+<!--      <div class="mt-2">-->
+<!--        <ChatOptions-->
+<!--            :options="options"-->
+<!--            :active-id="activeOptionId"-->
+<!--            @select="handleOptionSelect"-->
+<!--        />-->
+<!--      </div>-->
 
       <!-- Spacer pushes composer down -->
       <div class="flex-1"></div>

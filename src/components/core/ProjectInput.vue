@@ -28,6 +28,7 @@ onMounted(() => {
   <form @submit="handleSubmit"
         class="flex w-full
          items-center
+         rounded-lg
          bg-white
          shadow-[0_0_4px_0_#F2545B]
          backdrop-blur-lg ring-1 ring-accent">
@@ -35,9 +36,9 @@ onMounted(() => {
            type="text"
            ref="inputRef"
            placeholder="Tell me your vision, I’ll show you the path"
-           class="flex-1  bg-transparent px-8 py-4 text-lg outline-none placeholder:text-ink/40"/>
+           class="flex-1 rounded-lg bg-transparent px-8 py-4 text-lg outline-none placeholder:text-ink/40"/>
     <button type="submit"
-            class="mr-2 grid h-10 w-10 place-items-center  bg-ink text-white transition hover:opacity-90">
+            class="mr-2 rounded-lg grid h-10 w-10 place-items-center  bg-ink text-white transition hover:opacity-90">
       <Transition
           enter-active-class="transition duration-200 ease-out"
           enter-from-class="opacity-0 translate-y-2"

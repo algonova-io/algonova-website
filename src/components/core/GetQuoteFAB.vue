@@ -12,7 +12,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
   >
     <span class="text-body-large">Get a free quote in 2 minutes</span>
     <button type="submit"
-            class="mr-2 grid h-10 w-10 place-items-center  bg-ink text-white transition hover:opacity-90">
+            class="mr-2 rounded-lg grid h-10 w-10 place-items-center  bg-ink text-white transition hover:opacity-90">
             <span class="inline-block">
                   <font-awesome-icon
                       key="arrow"

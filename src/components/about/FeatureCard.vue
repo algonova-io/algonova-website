@@ -10,8 +10,7 @@ const props = defineProps<Props>()
 
 <template>
   <div
-      class="group  bg-white py-4 px-6 h-full
-           "
+      class="group rounded-lg bg-white py-4 px-6 h-full"
   >
     <div class="flex flex-col justify-center items-center gap-4">
       <img
