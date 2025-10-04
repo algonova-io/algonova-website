@@ -75,7 +75,7 @@ function runFunction(fn: () => void) {
       <div v-else class="flex items-center justify-end">
         <button
             type="button"
-            class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-black/80 text-white
+            class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-black/80 text-white
                    hover:bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             aria-label="Close"
             @click="emit('close')"

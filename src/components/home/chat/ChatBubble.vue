@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import {Sender} from "../../../models/Chat";
+import {Role} from "../../../models/Chat";
+import MarkdownIt from "markdown-it";
+import DOMPurify from "dompurify";
 
 const props = withDefaults(defineProps<{
-  sender: Sender
+  sender: Role
   text: string
 }>(), {
-  sender: 'assistant',
+  sender: 'model',
   text: ''
 })
 
@@ -19,22 +21,34 @@ const isUser = computed(() => props.sender === 'user')
 const bubbleClasses = computed(() => {
   return isUser.value
       ? 'bg-accent text-white shadow-sm'
-      : ' text-ink font-semibold'
+      : ' text-ink '
 })
 const rowJustify = computed(() => (isUser.value ? 'justify-end' : 'justify-start'))
 const ariaRole = computed(() => (isUser.value ? 'article' : 'article'))
+const md = new MarkdownIt({
+  breaks: true,   // newlines → <br>
+  linkify: true,  // URLs → <a>
+  html: false     // do NOT allow raw HTML from the model
+})
+
+const rendered = computed(() => {
+  const html = md.render(props.text ?? '')
+  // Sanitize before injecting into DOM
+  return DOMPurify.sanitize(html)
+})
+
 </script>
 
 <template>
   <div class="w-full">
-    <div :class="['flex', rowJustify]">
-      <p
+    <div :class="['flex', rowJustify]" >
+      <div
           :role="ariaRole"
-          class="max-w-[70ch] rounded-2xl px-4 py-3 text-[15px] leading-relaxed "
+          class="rounded-2xl px-4 py-3 text-[15px] leading-relaxed "
           :class="bubbleClasses"
+          v-html="rendered"
       >
-        {{ text }}
-      </p>
+      </div>
     </div>
   </div>
 </template>

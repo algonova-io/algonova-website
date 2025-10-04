@@ -1,9 +1,10 @@
-export type Sender = 'user' | 'model';
+export type Role = 'user' | 'model';
 
 export interface ChatMessage {
-    sender: Sender;
+    id:string;
+    role: Role;
     content: string;
-    createdAt: number; // ISO string for consistency
+    createdAt: number;
 }
 
 export interface ChatOption {

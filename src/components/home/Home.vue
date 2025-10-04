@@ -1,20 +1,21 @@
 <template>
   <div>
-<!--    <SiteNav :chat-active="chatActive" @close="chatActive = false" />-->
 
-    <main>
-      <section id="home"  class="scroll-mt-24 pt-20">
-      <HeroSection   v-if="!chatActive" key="hero" @start-chat="startChatFromHero" />
-      <ChatScreen  v-else key="chat" :initial-text="draftText" />
-      </section>
-      <section id="about"  class="scroll-mt-24">
-
-      <About />
-      </section>
-      <section id="projects"  class="scroll-mt-24">
-
-      <Projects />
-      </section>
+    <main >
+      <div id="chat" v-if="chatActive" class="overflow-y-hidden">
+        <ChatScreen key="chat" :initialMessage="draftText" />
+      </div>
+      <div v-else>
+        <section id="home"  class="scroll-mt-24 pt-20">
+          <HeroSection key="hero" @start-chat="startChatFromHero" />
+        </section>
+        <section id="about"  class="scroll-mt-24">
+          <About />
+        </section>
+        <section id="projects"  class="scroll-mt-24">
+          <Projects />
+        </section>
+      </div>
 
     </main>
 
@@ -34,7 +35,7 @@ import About from '../about/About.vue'
 import Projects from '../projects/Projects.vue'
 import GetQuoteFAB from '../core/GetQuoteFAB.vue'
 
-// ✅ Vuetify composable
+
 import { useIntersectionObserver } from '@vueuse/core'
 import {setFromSpy} from "../../router";
 import {shouldObserverBeActive} from "../core/compasebles/useAutoScroll";
@@ -53,6 +54,8 @@ const lockSpy = (d = 1) => { lock = Math.max(0, lock + d) }
 const isLocked = () => lock > 0
 
 function startChatFromHero(text: string) {
+  if (chatActive.value) return
+  console.log("startChatFromHero", text)
   draftText.value = text
   chatActive.value = !chatActive.value
 }

@@ -24,7 +24,7 @@ function startChatFromHero(text: string) {
 </script>
 
 <template>
-  <div>
+  <div :class="isChat ? 'overflow-hidden' : ''">
     <SiteNav
         :chat-active="isChat"
         @close="isChat = false"

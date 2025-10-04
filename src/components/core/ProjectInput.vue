@@ -16,6 +16,7 @@ function handleSubmit() {
     return
   }
   emit('submit', model.value)
+  model.value = ""
 }
 
 onMounted(() => {
@@ -25,8 +26,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <form @submit="handleSubmit"
-        class="flex w-full
+  <div
+      class="flex w-full
          items-center
          rounded-lg
          bg-white
@@ -38,6 +39,7 @@ onMounted(() => {
            placeholder="Tell me your vision, I’ll show you the path"
            class="flex-1 rounded-lg bg-transparent px-8 py-4 text-lg outline-none placeholder:text-ink/40"/>
     <button type="submit"
+            @click="handleSubmit"
             class="mr-2 rounded-lg grid h-10 w-10 place-items-center  bg-ink text-white transition hover:opacity-90">
       <Transition
           enter-active-class="transition duration-200 ease-out"
@@ -66,7 +68,7 @@ onMounted(() => {
         </span>
       </Transition>
     </button>
-  </form>
+  </div>
 </template>
 
 <style scoped>
