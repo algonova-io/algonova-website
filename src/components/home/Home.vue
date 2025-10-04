@@ -37,8 +37,7 @@ import GetQuoteFAB from '../core/GetQuoteFAB.vue'
 
 
 import { useIntersectionObserver } from '@vueuse/core'
-import {setFromSpy} from "../../router";
-import {shouldObserverBeActive} from "../core/compasebles/useAutoScroll";
+import {fromSpy, shouldObserverBeActive} from "../core/compasebles/useAutoScroll";
 
 const chatActive = defineModel<boolean>('chatActive', { default: false })
 const draftText = ref('')
@@ -71,11 +70,6 @@ function scrollToHash(hash: string) {
 type StopFn = () => void
 const stops: StopFn[] = []
 
-watch(shouldObserverBeActive,
-    () => {
-  console.log(shouldObserverBeActive.value, " shouldObserverBeActive")
-})
-
 
 function observeSection(selector: '#home'|'#about'|'#projects') {
   const el = document.querySelector(selector)
@@ -84,15 +78,17 @@ function observeSection(selector: '#home'|'#about'|'#projects') {
 
   // Vuetify returns { stop }
   const { stop } = useIntersectionObserver(
-      el,
+      el as any,
       (entries: any) => {
         if (!shouldObserverBeActive.value) {
-          console.log("shouldObserverBeActive is false")
+
+          setTimeout(() => {
+            shouldObserverBeActive.value = true
+          })
+
           return
         }
-
-        console.log("shouldObserverBeActive is true")
-
+        fromSpy.value = true
         const e = entries[0]
         if (!e?.isIntersecting) return
         const targetHash = selector
@@ -101,13 +97,10 @@ function observeSection(selector: '#home'|'#about'|'#projects') {
         if ((route.hash || '') === targetHash) return
 
         // Update only the hash, tell scrollBehavior to skip
-        // lockSpy(+1)
-        // setFromSpy(true)
+        lockSpy(+1)
         router.replace({ hash: targetHash,})
             .finally(() => {
-              shouldObserverBeActive.value = true
-
-              //  lockSpy(-1)
+              lockSpy(-1)
             })
       },
       {

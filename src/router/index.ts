@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import {lockSpy} from "../components/core/utils";
-import {shouldObserverBeActive} from "../components/core/compasebles/useAutoScroll";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -24,52 +22,11 @@ const routes: RouteRecordRaw[] = [
     },
     { path: '/:pathMatch(.*)*', redirect: { name: 'home' } },
 ];
-let fromSpy = false
-
-export function setFromSpy(v: boolean) { fromSpy = v }
 
 const router = createRouter({
     history: createWebHistory(),
     routes,
-    scrollBehavior(to, from, saved) {
-         if (saved) return saved
 
-        // If the spy updated the hash, do NOT scroll again.
-        console.log("Inside router callback animationframe")
-
-        // if (fromSpy) {
-        //     setFromSpy(false)
-        //     return false
-        // }
-
-        if (to.hash) {
-            return new Promise(resolve => {
-                requestAnimationFrame(() => {
-                    console.log("Inside router callback animationframe")
-                    const el = document.querySelector(to.hash) as HTMLElement | null
-                    if (!el) return resolve({ top: 0 })
-
-                    const headerOffset = 88 // your sticky header height
-                    const y = el.getBoundingClientRect().top + window.scrollY - headerOffset
-
-                    // Lock the spy while we scroll
-              //      lockSpy()
-
-                    window.scrollTo({ top: y, behavior: 'smooth' })
-
-                    // Best-effort unlock if scrollend isn’t supported
-                    window.addEventListener('scrollend', () => lockSpy(0), { once: true })
-                    setTimeout(() => lockSpy(0), 800) // fallback timeout
-                    console.log("Setting should observer be active to true")
-                //    shouldObserverBeActive.value = true
-                    resolve(false) // we handled it manually
-                })
-            })
-        }
-
-        return { top: 0, behavior: 'smooth' }
-
-    },
     linkActiveClass: 'index-active',
     linkExactActiveClass: 'index-exact',
 });
