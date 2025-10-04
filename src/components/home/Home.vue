@@ -2,9 +2,9 @@
   <div>
 
     <main >
-      <div id="chat" v-if="chatActive" class="overflow-y-hidden">
+      <Modal id="chat" v-if="chatActive" class="overflow-y-hidden">
         <ChatScreen key="chat" :initialMessage="draftText" />
-      </div>
+      </Modal>
       <div v-else>
         <section id="home"  class="scroll-mt-24 pt-20">
           <HeroSection key="hero" @start-chat="startChatFromHero" />
@@ -38,6 +38,7 @@ import GetQuoteFAB from '../core/GetQuoteFAB.vue'
 
 import { useIntersectionObserver } from '@vueuse/core'
 import {fromSpy, shouldObserverBeActive} from "../core/compasebles/useAutoScroll";
+import Modal from "../modals/modal.vue";
 
 const chatActive = defineModel<boolean>('chatActive', { default: false })
 const draftText = ref('')
