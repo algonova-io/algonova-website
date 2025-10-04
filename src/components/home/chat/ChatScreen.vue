@@ -119,7 +119,7 @@ function updateUi(messageChunk: string, messageId: string) {
 <!--      <div class="flex-1"></div>-->
 
       <!-- Composer -->
-      <div class="pb-10 vt-composer sticky bottom-0 z-20 -mx-6 px-6 pt-3
+      <div class="pb-10  sticky bottom-0 z-20 -mx-6 px-6 pt-3
                bg-gradient-to-t from-soft/90 to-soft/30
                ">
         <ProjectInput @submit="handleSubmit"/>

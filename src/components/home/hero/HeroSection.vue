@@ -40,7 +40,7 @@ function onSubmit(value: string) {
           </p>
         </div>
 
-        <div class="vt-composer flex w-full flex-col items-start mt-14 gap-4 justify-center">
+        <div class="flex w-full flex-col items-start mt-14 gap-4 justify-center">
           <ProjectInput @submit="onSubmit"/>
           <div class="ms-2 flex flex-row justify-bottom items-start">
             <img src="/src/assets/Arrow_04.svg" style="height: 60px" class="me-4">

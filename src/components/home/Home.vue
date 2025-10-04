@@ -62,20 +62,21 @@ async function startChatFromHero(text: string) {
   // draftText.value = text
   // chatActive.value = !chatActive.value
 
-  if ('startViewTransition' in document) {
-    // The DOM mutation must happen inside the callback.
-    // Returning nextTick() lets Vue flush the new state before the transition snapshots.
-    // @ts-ignore types for experimental API
-    await (document as any).startViewTransition(() => {
-      draftText.value = text
-      chatActive.value = !chatActive.value
-      return nextTick()
-    }).finished
-  } else {
-    // Fallback if VTA isn’t supported
-    draftText.value = text
-    chatActive.value = !chatActive.value
-  }
+  // if ('startViewTransition' in document) {
+  //   // The DOM mutation must happen inside the callback.
+  //   // Returning nextTick() lets Vue flush the new state before the transition snapshots.
+  //   // @ts-ignore types for experimental API
+  //   await (document as any).startViewTransition(() => {
+  //     draftText.value = text
+  //     chatActive.value = !chatActive.value
+  //     return nextTick()
+  //   }).finished
+  // } else {
+  //   // Fallback if VTA isn’t supported
+  // }
+  draftText.value = text
+  chatActive.value = !chatActive.value
+
 }
 
 function scrollToHash(hash: string) {
