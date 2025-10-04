@@ -52,6 +52,10 @@ function runFunction(fn: () => void) {
       </div>
       <!-- Right cell: nav links + CTA -->
 
+      <Transition
+      mode="out-in"
+      enter-active-class="animate-slide-in-right"
+      leave-active-class="animate-slide-out-right">
       <div v-if="!chatActive" class="flex items-center justify-end gap-6">
 
         <div class="hidden md:flex items-center gap-2 " v-for="link in links" :key="link.hash">
@@ -83,6 +87,7 @@ function runFunction(fn: () => void) {
           <FontAwesomeIcon :icon="faXmark" class="h-4 w-4"/>
         </button>
       </div>
+      </Transition>
     </nav>
   </header>
 </template>

@@ -1,8 +1,10 @@
 <template>
+  <div v-bind="$attrs" class="fixed inset-0 overflow-y-auto">
   <slot></slot>
+  </div>
 </template>
 <script setup lang="ts">
-import {onMounted, onUnmounted} from "vue";
+import {onBeforeUnmount, onMounted, onUnmounted} from "vue";
 
   onMounted(() => {
     document.querySelector('body')?.classList.add('overflow-hidden')
@@ -13,5 +15,8 @@ import {onMounted, onUnmounted} from "vue";
 
   })
 
+  onBeforeUnmount(() => {
+
+  })
 
 </script>

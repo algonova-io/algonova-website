@@ -2,10 +2,13 @@
   <div>
 
     <main >
-      <Modal id="chat" v-if="chatActive" class="overflow-y-hidden">
-        <ChatScreen key="chat" :initialMessage="draftText" />
-      </Modal>
-      <div v-else>
+      <Transition
+         >
+        <Modal id="chat" v-if="chatActive" class="mt-14 overflow-y-hidden">
+          <ChatScreen key="chat" :initialMessage="draftText" />
+        </Modal>
+      </Transition>
+      <div v-if="!chatActive">
         <section id="home"  class="scroll-mt-24 pt-20">
           <HeroSection key="hero" @start-chat="startChatFromHero" />
         </section>
@@ -53,11 +56,26 @@ let lock = 0
 const lockSpy = (d = 1) => { lock = Math.max(0, lock + d) }
 const isLocked = () => lock > 0
 
-function startChatFromHero(text: string) {
+async function startChatFromHero(text: string) {
   if (chatActive.value) return
   console.log("startChatFromHero", text)
-  draftText.value = text
-  chatActive.value = !chatActive.value
+  // draftText.value = text
+  // chatActive.value = !chatActive.value
+
+  if ('startViewTransition' in document) {
+    // The DOM mutation must happen inside the callback.
+    // Returning nextTick() lets Vue flush the new state before the transition snapshots.
+    // @ts-ignore types for experimental API
+    await (document as any).startViewTransition(() => {
+      draftText.value = text
+      chatActive.value = !chatActive.value
+      return nextTick()
+    }).finished
+  } else {
+    // Fallback if VTA isn’t supported
+    draftText.value = text
+    chatActive.value = !chatActive.value
+  }
 }
 
 function scrollToHash(hash: string) {
