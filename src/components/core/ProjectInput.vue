@@ -11,7 +11,7 @@ watch(model, () => {
 })
 const inputRef = ref<HTMLInputElement | null>(null)
 
-function handleSubmit() {
+function handleSubmit(event?: Event)  {
   if (model.value.trim().length === 0) {
     return
   }
@@ -26,7 +26,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
+  <form
+      @submit.prevent="handleSubmit"
       class="flex w-full
          items-center
          rounded-lg
@@ -68,7 +69,7 @@ onMounted(() => {
         </span>
       </Transition>
     </button>
-  </div>
+  </form>
 </template>
 
 <style scoped>
