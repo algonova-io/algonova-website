@@ -24,9 +24,9 @@
 
     <!-- FAB is fixed; render only when chat is NOT open -->
     <GetQuoteFAB
-        v-if="!chatActive"
+        v-if="!chatActive && route.hash !== '#home'"
         class="z-50"
-        @click=""
+        @click="scrollToHash('#home')"
     />
   </div>
 </template>
