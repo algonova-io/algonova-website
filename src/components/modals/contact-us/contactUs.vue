@@ -9,6 +9,7 @@
             <input
                 v-model.trim="form.name"
                 @blur="markTouched('name')"
+                @input="markTouched('name')"
                 id="name"
                 name="name"
                 type="text"
@@ -27,6 +28,7 @@
             <input
                 v-model.trim="form.surname"
                 @blur="markTouched('surname')"
+                @input="markTouched('surname')"
 
                 id="surname"
                 name="surname"
@@ -49,6 +51,7 @@
               v-model.trim="form.email"
               id="email"
               @blur="markTouched('email')"
+              @input="markTouched('email')"
 
               name="email"
               type="email"
@@ -69,10 +72,11 @@
           <textarea
               v-model.trim="form.message"
               @blur="markTouched('message')"
+              @input="markTouched('message')"
 
               id="message"
               name="message"
-              rows="5"
+              rows="3"
               :aria-invalid="!!validationErrors.message.err"
               :aria-describedby="validationErrors.message.err ? 'err-message' : undefined"
               class="mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent resize-none"
