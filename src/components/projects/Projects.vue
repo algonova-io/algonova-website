@@ -5,6 +5,26 @@ const taskaroundGradient =
     'linear-gradient(180deg, #F2545B 0%, #FF3232 50%, #FF0084 100%)'
 const infitColor = '#005D7E'
 
+const projectCards = [
+  {
+    title: 'Taskaround',
+    artSrc: '/src/assets/taskaround_mark.svg',
+    description: `A hyperlocal gig marketplace app. Designed and built end to end, available on on PlayStore and AppStore`,
+    href: `https://taskaround.io/`,
+    projectDate: '2025-07',
+    client: 'Taskaround',
+    tags: ['android', 'ios', 'marketplace', 'MVP']
+  },
+  {
+    title: 'InFit',
+    artSrc: '/src/assets/InFit.svg',
+    description: `A workout planner app, to stay on top of your health goals.`,
+    href: `https://github.com/KenAli77/InFit/tree/master`,
+    projectDate: '2023-05',
+    client: 'InFit',
+    tags: ['android', 'ios', 'marketplace', 'MVP']
+  },
+]
 </script>
 
 <template>
@@ -20,37 +40,20 @@ const infitColor = '#005D7E'
           Each project tells a story of how we solved real problems with thoughtful design and solid engineering.
         </p>
       </header>
-      <div class="space-y-6 md:space-y-7 mt-12">
+      <div class="space-y-6 md:space-y-7 mt-12 mb-12 pb-11">
         <!-- Taskaround -->
         <ProjectCard
-            title="Taskaround"
-            :description="`A hyperlocal gig marketplace app. Designed and built end to end, available on on PlayStore and AppStore.`"
-            :bgStyle="{ background: taskaroundGradient }"
-            rounded="rounded"
-            padding="px-6 py-8 md:px-10 md:py-10"
-        >
-          <template #art>
-            <!-- Big brand lockup on the right -->
-                  <img src="/src/assets/taskaround_mark.svg" alt="" class="fill-height"/>
-          </template>
-        </ProjectCard>
+            v-for="card in projectCards"
+            :title="card.title"
+            :artSrc="card.artSrc"
+            :artAlt="card.title"
+            :date="card.projectDate"
+            :client="card.client"
+            :tags="card.tags"
+            :description="card.description"
+            :href="card.href"
 
-        <!-- InFit -->
-        <ProjectCard
-            eyebrow="InFit"
-            title="InFit"
-            :description="`A workout planner app, to stay on top of your health goals.`"
-            :bg-style="{ background: infitColor }"
-            rounded="rounded"
-            padding="px-6 py-8 md:px-10 md:py-10"
-            :titleClass="`text-white text-title-medium`"
-            :descClass="`text-white/90 text-body-medium`"
-            :eyebrowClass="`text-white/80`"
         >
-          <template #art>
-            <!-- Oversized right-side wordmark matching the reference -->
-            <img src="../../assets/InFit.svg" alt="" class="fill-height"/>
-          </template>
         </ProjectCard>
       </div>
 

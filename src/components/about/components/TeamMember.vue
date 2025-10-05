@@ -12,14 +12,13 @@ const props = defineProps<Props>()
 
 <template>
   <article class=" d-flex flex-column gap-4 md:gap-6 items-start">
-    <div class="grid-cols-12 grid gap-6 justify-start items-start">
+    <div class="grid-cols-12 grid gap-6 justify-start items-center">
       <div class="col-span-4">
-        <figure class="relative ">
+        <figure class="relative  aspect-square w-full h-full ">
           <img
               :src="photo"
               :alt="alt || name"
-              class="object-cover grayscale w-full"
-              style=" width: 200px"
+              class="object-cover rounded-full w-full h-full"
               loading="lazy"
           />
         </figure>

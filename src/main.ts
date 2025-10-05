@@ -6,6 +6,9 @@ import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import {faArrowUp, faCircleChevronDown} from "@fortawesome/free-solid-svg-icons";
 import {initializeApp} from "firebase/app";
 import router from "./router";
+import {getFunctions} from "firebase/functions";
+import { getFirestore } from "firebase/firestore";
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 library.add(faArrowUp,faCircleChevronDown)
 const firebaseConfig = {
@@ -21,8 +24,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
-
 createApp(App)
     .component('font-awesome-icon', FontAwesomeIcon)
     .use(router)
     .mount('#app')
+
+export const functions = getFunctions(app,"europe-west1");
+export const auth = getAuth(app);
+
+export const db = getFirestore(app);

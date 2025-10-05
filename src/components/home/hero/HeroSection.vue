@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import ProjectInput from '../../core/ProjectInput.vue'
 import ScrollCue from '../../core/ScrollCue.vue'
-import BackgroundLogo from "../../core/BackgroundLogo.vue";
-import {ref} from "vue";
 import TypeWriter from "../TypeWriter.vue";
+import {useModalStore} from "../../modals/composable/useModalStore";
 
-const emit = defineEmits<{
-  (e: 'start-chat', text: string): void
-}>()
+const {toggleChat, setData, chatActive} = useModalStore()
 
 function onSubmit(value: string) {
-  emit('start-chat', value)
+    if (chatActive.value) return
+    setData(value)
+    toggleChat()
 }
 </script>
 
@@ -40,7 +39,7 @@ function onSubmit(value: string) {
           </p>
         </div>
 
-        <div class="vt-composer flex w-full flex-col items-start mt-14 gap-4 justify-center">
+        <div class="flex w-full flex-col items-start mt-14 gap-4 justify-center">
           <ProjectInput @submit="onSubmit"/>
           <div class="ms-2 flex flex-row justify-bottom items-start">
             <img src="/src/assets/Arrow_04.svg" style="height: 60px" class="me-4">

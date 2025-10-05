@@ -1,87 +1,138 @@
 <script setup lang="ts">
-import {ref} from 'vue'
+import {Directive, nextTick, onMounted, ref, watch} from 'vue'
 import ChatThread from './ChatThread.vue'
-import ChatOptions from './ChatOptions.vue'
-import {ChatMessage, ChatOption} from "../../../models/Chat";
+import {httpsCallable} from 'firebase/functions';
+import {ChatMessage} from "../../../models/Chat";
 import ProjectInput from "../../core/ProjectInput.vue";
+import {auth, db, functions} from "../../../main";
+import {onSnapshot, collection, doc} from "firebase/firestore";
+import {signInAnonymously} from "firebase/auth";
+import MarkdownIt from 'markdown-it'
+import DOMPurify from 'dompurify'
+import {useModalStore} from "../../modals/composable/useModalStore";
 
+const sessionId = ref<string>();
+const sessionActive = ref<boolean>(true);
+const messages = ref<ChatMessage[]>([])
+const isModelTyping = ref<boolean>(false)
+const md = new MarkdownIt()
+const {data} = useModalStore()
+onMounted(async () => {
+  signInAnonymously(auth).then((data) => {
+    console.log("Signed in as: ", data.user.uid, "")
+    sessionId.value = data.user.uid;
 
-/** Mock conversation to match your screenshot */
-const messages = ref<ChatMessage[]>([
-  {
-    id: 'm1',
-    sender: 'assistant',
-    text:
-        "Got it. Thanks for the context. To get started, could you tell me what type of project you're requesting a quote for? " +
-        'You can select one from the options below, or type in another.',
-    createdAt: new Date().toISOString(),
-  },
-  {
-    id: 'm2',
-    sender: 'user',
-    text: 'I have an idea for an app I want to get developed, perhaps an MVP to start with.',
-    createdAt: new Date().toISOString(),
-  },
-])
+    onSnapshot(doc(db, `chats/${sessionId.value}`), (data) => {
+      if (data.data()?.completed) {
+        console.log("Chat closed")
+        sessionActive.value = false;
+        return
+      }
+    })
+    onSnapshot(collection(db, `chats/${sessionId.value}/messages`), (data) => {
+          const update = data.docs.map((doc) => {
+            return doc.data() as ChatMessage
+          }).sort((a, b) => b.createdAt - a.createdAt)
+          if (messages.value.length === 0) {
+            messages.value = update.reverse();
+          } else {
+            messages.value.push(update[0])
+          }
+        }
+    )
+  }).catch((error) => {
+    console.log(error)
+  })
+})
 
-const options = ref<ChatOption[]>([
-  { id: 'mobile', label: 'Mobile App' },
-  { id: 'api', label: 'API or Backend service' },
-  { id: 'web', label: 'Web App' },
-  { id: 'desktop', label: 'Desktop software' },
-  { id: 'integration', label: 'Integration with an existing system' },
-  { id: 'cross', label: 'Cross platform' },
-])
+async function handleSubmit(text: string) {
+  if (!sessionActive.value) {
+    return
+  }
 
-const activeOptionId = ref<string | null>(null)
+  isModelTyping.value = true;
 
-function handleOptionSelect(opt: ChatOption) {
-  activeOptionId.value = opt.id
-  // push a user message for visibility
-  messages.value = [
-    ...messages.value,
-    {
-      id: crypto.randomUUID(),
-      sender: 'user',
-      text: opt.label,
-      createdAt: new Date().toISOString(),
-    },
-  ]
+  const sendMessage = httpsCallable(functions, "chat", {})
+  const responseId = crypto.randomUUID();
+  const {stream, data} = await sendMessage.stream({
+    prompt: text,
+    messageId: responseId,
+    sessionId: sessionId.value,
+  });
+  const newMessage: ChatMessage = {
+    id: responseId,
+    content: "",
+    createdAt: Date.now(),
+    role: "model",
+  }
+  messages.value.push(newMessage);
+  for await (const messageChunk of stream) {
+    // update the UI every time a new chunk is received
+    // from the callable function
+    const message = messageChunk as any
+    if (!message.content)
+      continue;
+    updateUi(message.content, responseId);
+  }
+  isModelTyping.value = false;
+
 }
 
-function handleSubmit(text: string) {
-  messages.value = [
-    ...messages.value,
-    { id: crypto.randomUUID(), sender: 'user', text, createdAt: new Date().toISOString() },
-  ]
-  // here you might call your API, then push an assistant response
+function toText(content: unknown): string {
+  if (Array.isArray(content)) {
+    // Genkit Part[]—concatenate text parts; adjust if you store multiple parts
+    return content.map((p: any) => p?.text ?? '').join('')
+  }
+  return String(content ?? '')
+}
+
+const vMarkdown: Directive<HTMLElement, unknown> = {
+  mounted(el, binding) {
+    const html = md.render(toText(binding.value))
+    el.innerHTML = DOMPurify.sanitize(html)
+  },
+  updated(el, binding) {
+    if (binding.value === binding.oldValue) return
+    const html = md.render(toText(binding.value))
+    el.innerHTML = DOMPurify.sanitize(html)
+  },
+}
+
+function updateUi(messageChunk: string, messageId: string) {
+  // find the last element with given id and then edit its content by appending the new chunk
+  messages.value = messages.value.map((message) => {
+    if (message.id === messageId) {
+      message.content = message.content + messageChunk;
+    }
+    return message
+  })
 }
 </script>
 
 <template>
   <section class="relative hero-background min-h-screen">
     <!-- Chat body -->
-    <div class="mx-auto flex min-h-[80vh] max-w-6xl flex-col gap-6 px-6 pt-6">
+    <div class="mx-auto flex h-[90vh] max-w-6xl flex-col  px-6 pt-6">
       <!-- Thread -->
-      <ChatThread :messages="messages" />
+      <ChatThread :messages="messages" :is-model-typing="isModelTyping"/>
 
       <!-- Options row (assistant quick picks) -->
-      <div class="mt-2">
-        <ChatOptions
-            :options="options"
-            :active-id="activeOptionId"
-            @select="handleOptionSelect"
-        />
-      </div>
+      <!--      <div class="mt-2">-->
+      <!--        <ChatOptions-->
+      <!--            :options="options"-->
+      <!--            :active-id="activeOptionId"-->
+      <!--            @select="handleOptionSelect"-->
+      <!--        />-->
+      <!--      </div>-->
 
       <!-- Spacer pushes composer down -->
-      <div class="flex-1"></div>
+      <!--      <div class="flex-1"></div>-->
 
       <!-- Composer -->
-      <div class="pb-10 vt-composer sticky bottom-0 z-20 -mx-6 px-6 pt-3
+      <div class="pb-10  sticky bottom-0 z-20 -mx-6 px-6 pt-3
                bg-gradient-to-t from-soft/90 to-soft/30
                ">
-        <ProjectInput @submit="handleSubmit" />
+        <ProjectInput @submit="handleSubmit"/>
       </div>
     </div>
   </section>

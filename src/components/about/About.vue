@@ -53,19 +53,6 @@ const ribbonWork =
 
 <template>
   <div class="relative w-full">
-<!--    <BackgroundShape class="text-accent -z-10"-->
-<!--                     :d="ribbonInitial"-->
-<!--                     :morphTargets="[ribbonInitial]"-->
-<!--                     :strokeWidth="1"-->
-<!--                     fill="white"-->
-<!--                     :points="[-->
-<!--        { x: 0,   y: 260 },  // start of your diagonal/polyline-->
-<!--        { x: 300, y: 440 },  // end (or add more points for a bent line)-->
-<!--        { x: 240, y: 1200 },  // end (or add more points for a bent line)-->
-<!--      ]"-->
-
-<!--                     :autoMorph="true"-->
-<!--    />-->
 
     <div
         aria-labelledby="about-heading"

@@ -1,33 +1,16 @@
 
 <script setup lang="ts">
 import SiteNav from './components/core/SiteNav.vue'
-import HeroSection from './components/home/hero/HeroSection.vue'
-import BackgroundLogo from "./components/core/BackgroundLogo.vue";
-import {ref} from "vue";
-import ChatScreen from "./components/home/chat/ChatScreen.vue";
-
-const isChat = ref(false)
-const draftText = ref<string>('') // optional: carry the user’s first input
-
-function startChatFromHero(text: string) {
-  draftText.value = text
-
-  // Use the View Transitions API if available
-  const doSwap = () => { isChat.value = true }
-  if ((document as any).startViewTransition) {
-    (document as any).startViewTransition(doSwap)
-  } else {
-    doSwap()
-  }
-}
+import {useModalStore} from "./components/modals/composable/useModalStore";
+const {chatActive} = useModalStore()
+import { Toaster } from 'vue-sonner'
+import 'vue-sonner/style.css'
 
 </script>
 
 <template>
-  <div>
+  <div :class="chatActive ? 'overflow-hidden' : ''">
     <SiteNav
-        :chat-active="isChat"
-        @close="isChat = false"
     />
     <RouterView v-slot="{ Component }">
       <Transition
@@ -38,10 +21,10 @@ function startChatFromHero(text: string) {
           leave-active-class="transition duration-150 ease-in"
           leave-from-class="opacity-100 translate-y-0"
           leave-to-class="opacity-0 -translate-y-2">
-        <component :is="Component"
-                   v-model:chat-active="isChat"/>
+        <component :is="Component"/>
       </Transition>
     </RouterView>
+    <Toaster position="top-right" richColors />
   </div>
 </template>
 

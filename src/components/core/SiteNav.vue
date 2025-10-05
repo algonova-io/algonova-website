@@ -3,25 +3,16 @@ import LogoMark from './LogoMark.vue'
 import PrimaryButton from './PrimaryButton.vue'
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import {RouteRecordName, useRoute, useRouter} from "vue-router";
+import { useRoute, useRouter} from "vue-router";
 import {computed} from "vue";
 import {shouldObserverBeActive} from "./compasebles/useAutoScroll";
+import {useModalStore} from "../modals/composable/useModalStore";
+import {useScrollHandler} from "./compasebles/scrollHandler";
 
-defineProps<{
-  chatActive: boolean
-}>()
-const emit = defineEmits<{
-  (e: 'close'): void
-}>()
 
 const route = useRoute();
-const router = useRouter();
-
-function toLabel(name: RouteRecordName | null | undefined) {
-  if (!name) return 'Hero';
-  const s = typeof name === 'string' ? name : String(name);
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
+const {isModalActive, closeAll, toggleContact} = useModalStore()
+const {scrollToHash} = useScrollHandler(useRouter(), route, isModalActive)
 
 const links = [
   {label: 'Home', hash: '#home', href: {name: 'home', hash: '#home'}},
@@ -37,9 +28,9 @@ function isLinkActive(hash: string) {
   return currentHash.value === hash
 }
 
-function runFunction(fn: () => void) {
-  fn()
-  shouldObserverBeActive.value = false
+function onNavigate(href: string) {
+  // shouldObserverBeActive.value = false
+  scrollToHash(href)
 }
 </script>
 
@@ -51,13 +42,16 @@ function runFunction(fn: () => void) {
       </div>
       <!-- Right cell: nav links + CTA -->
 
-      <div v-if="!chatActive" class="flex items-center justify-end gap-6">
+      <Transition
+      mode="out-in"
+      enter-active-class="animate-slide-in-right"
+      leave-active-class="animate-slide-out-right">
+      <div v-if="!isModalActive" class="flex items-center justify-end gap-6">
 
         <div class="hidden md:flex items-center gap-2 " v-for="link in links" :key="link.hash">
-          <RouterLink :to="link.href" custom v-slot="{ href, navigate }">
-            <a
-                :href="href"
-                @click="runFunction(navigate)"
+          <RouterLink :to="link.href" custom>
+            <button
+                @click="onNavigate(link.href.hash,)"
                 :aria-current="isLinkActive(link.hash) ? 'page' : undefined"
                 :class="[
                 'px-3 py-2 text-m font-semibold transition-opacity',
@@ -65,23 +59,24 @@ function runFunction(fn: () => void) {
               ]"
             >
               {{ link.label }}
-            </a>
+            </button>
           </RouterLink>
         </div>
 
-        <PrimaryButton as="a" href="#">Get in touch</PrimaryButton>
+        <PrimaryButton as="button" @click="toggleContact" >Get in touch</PrimaryButton>
       </div>
       <div v-else class="flex items-center justify-end">
         <button
             type="button"
-            class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-black/80 text-white
+            class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-black/80 text-white
                    hover:bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             aria-label="Close"
-            @click="emit('close')"
+            @click="closeAll()"
         >
           <FontAwesomeIcon :icon="faXmark" class="h-4 w-4"/>
         </button>
       </div>
+      </Transition>
     </nav>
   </header>
 </template>

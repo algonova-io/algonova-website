@@ -14,7 +14,7 @@ type Member = {
 
 const members: Member[] = [
   {
-    photo: '../../assets/vitalii.png',
+    photo: '/src/assets/6.png',
     name: 'Kenidiid',
     role: 'Product Engineer',
     quote: "If it doesn’t feel good to use, it’s not finished",
@@ -26,10 +26,10 @@ joys in an interaction, Kenidiid is driven by creating products that delight as 
     alt: 'Portrait of Kenidiid'
   },
   {
-    photo: '../../assets/vitalii.png',
+    photo: '/src/assets/7.png',
     name: 'Vitalii',
     role: 'Software Engineer',
-    quote: 'Challenges are what make building fun',
+    quote: 'I am very gay.',
     bio: `Vitalii is our Software Engineer. He’s worked on technically demanding projects across multiple domains —
 from Augmented Reality applications to video conferencing platforms and beyond. Analytical by nature, he approaches
 problems with precision and curiosity, a trait that once earned him top honors in math olympiads back home in Ukraine.
