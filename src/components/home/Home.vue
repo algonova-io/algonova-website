@@ -11,23 +11,30 @@
 
       <Transition
           mode="out-in"
-          enter-active-class="animate-slide-down"
+          enter-active-class="animate-slide-in-down"
+          leave-active-class="animate-slide-out-up"
       >
         <Modal id="contactUs" v-if="contactActive" class="mt-14 ">
           <ContactUs key="contactUs" />
         </Modal>
       </Transition>
-      <div v-if="!isModalActive">
-        <section id="home"  class="scroll-mt-24 pt-20">
-          <HeroSection key="hero" />
-        </section>
-        <section id="about"  class="scroll-mt-24">
-          <About />
-        </section>
-        <section id="projects"  class="scroll-mt-24">
-          <Projects />
-        </section>
-      </div>
+      <Transition
+      mode="out-in"
+      enter-active-class="animate-slide-in-down"
+      leave-active-class="animate-slide-out-up"
+      >
+        <div v-if="!isModalActive">
+          <section id="home"  class="scroll-mt-24 pt-20">
+            <HeroSection key="hero" />
+          </section>
+          <section id="about"  class="scroll-mt-24">
+            <About />
+          </section>
+          <section id="projects"  class="scroll-mt-24">
+            <Projects />
+          </section>
+        </div>
+      </Transition>
 
     </main>
 

@@ -1,9 +1,8 @@
 <template>
   <div class="min-h-screen flex items-center justify-center overflow-auto bg-soft px-4 py-2">
-    <div class="w-full max-w-lg bg-white rounded-2xl shadow-md p-8 overflow-auto">
+    <div class="w-full max-w-3xl bg-white rounded-2xl shadow-md p-8 overflow-auto">
       <h1 class="text-title-large text-ink mb-6 text-center">Contact Us</h1>
       <form @submit.prevent="handleSubmit" class="space-y-4">
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label for="name" class="block text-sm font-medium text-secondaryText">Name</label>
             <input
@@ -16,35 +15,14 @@
                 autocomplete="given-name"
                 :aria-invalid="!!validationErrors.name.err"
                 :aria-describedby="validationErrors.name.err ? 'err-name' : undefined"
-                class="mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent"
+                class="mt-1 p-1.5 w-full rounded-lg border border-white/20 bg-white/40 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)] focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
                 required
             />
-            <p v-if="validationErrors.name.err" id="err-name" class="mt-1 text-sm text-red-600">{{
+            <p v-if="validationErrors.name.err" id="err-name" class="mt-1 text-sm text-accent/80">{{
                 validationErrors.name.err
               }}</p>
           </div>
-          <div>
-            <label for="surname" class="block text-sm font-medium text-secondaryText">Surname</label>
-            <input
-                v-model.trim="form.surname"
-                @blur="markTouched('surname')"
-                @input="markTouched('surname')"
 
-                id="surname"
-                name="surname"
-                type="text"
-                autocomplete="family-name"
-                :aria-invalid="!!validationErrors.surname.err"
-                :aria-describedby="validationErrors.surname.err ? 'err-surname' : undefined"
-                class="mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent"
-                required
-            />
-            <p v-if="validationErrors.surname.err" id="err-surname" class="mt-1 text-sm text-red-600">{{
-                validationErrors.surname.err
-              }}</p>
-
-          </div>
-        </div>
         <div>
           <label for="email" class="block text-sm font-medium text-secondaryText">Email</label>
           <input
@@ -59,10 +37,10 @@
               autocomplete="email"
               :aria-invalid="!!validationErrors.email.err"
               :aria-describedby="validationErrors.email.err ? 'err-email' : undefined"
-              class="mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent"
+              class="mt-1 p-1.5 w-full rounded-lg border border-white/20 bg-white/40 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)] focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
               required
           />
-          <p v-if="validationErrors.email.err" id="err-email" class="mt-1 text-sm text-red-600">{{
+          <p v-if="validationErrors.email.err" id="err-email" class="mt-1 text-sm text-accent/80">{{
               validationErrors.email.err
             }}</p>
         </div>
@@ -76,14 +54,14 @@
 
               id="message"
               name="message"
-              rows="3"
+              rows="4"
               :aria-invalid="!!validationErrors.message.err"
               :aria-describedby="validationErrors.message.err ? 'err-message' : undefined"
-              class="mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+              class="mt-1 w-full p-1.5 rounded-lg border resize-none border-white/20 bg-white/40 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)] focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
               required
               minlength="10"
           />
-          <p v-if="validationErrors.message.err" id="err-message" class="mt-1 text-sm text-red-600">{{
+          <p v-if="validationErrors.message.err" id="err-message" class="mt-1 text-sm text-accent/80">{{
               validationErrors.message.err
             }}</p>
         </div>
