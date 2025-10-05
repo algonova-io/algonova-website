@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import ProjectInput from '../../core/ProjectInput.vue'
 import ScrollCue from '../../core/ScrollCue.vue'
-import BackgroundLogo from "../../core/BackgroundLogo.vue";
-import {ref} from "vue";
 import TypeWriter from "../TypeWriter.vue";
 import {useModalStore} from "../../modals/composable/useModalStore";
 

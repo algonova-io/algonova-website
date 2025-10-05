@@ -42,13 +42,7 @@ html {
     }
 }
 
-#projects {
-  background: {
-    image: url(#{$bg-image-projects});
-    repeat: no-repeat;
-    size: 100%
-  }
-}
+
 // View transition
 ::view-transition-old(root),
 ::view-transition-new(root) {

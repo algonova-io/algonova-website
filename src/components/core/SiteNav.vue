@@ -3,20 +3,16 @@ import LogoMark from './LogoMark.vue'
 import PrimaryButton from './PrimaryButton.vue'
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import {RouteRecordName, useRoute, useRouter} from "vue-router";
+import { useRoute, useRouter} from "vue-router";
 import {computed} from "vue";
 import {shouldObserverBeActive} from "./compasebles/useAutoScroll";
 import {useModalStore} from "../modals/composable/useModalStore";
+import {useScrollHandler} from "./compasebles/scrollHandler";
 
 
 const route = useRoute();
 const {isModalActive, closeAll, toggleContact} = useModalStore()
-
-function toLabel(name: RouteRecordName | null | undefined) {
-  if (!name) return 'Hero';
-  const s = typeof name === 'string' ? name : String(name);
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
+const {scrollToHash} = useScrollHandler(useRouter(), route, isModalActive)
 
 const links = [
   {label: 'Home', hash: '#home', href: {name: 'home', hash: '#home'}},
@@ -32,10 +28,9 @@ function isLinkActive(hash: string) {
   return currentHash.value === hash
 }
 
-function runFunction(fn: () => void) {
-  console.log("Setting should observer be active to false")
-  shouldObserverBeActive.value = false
-  fn()
+function onNavigate(href: string) {
+  // shouldObserverBeActive.value = false
+  scrollToHash(href)
 }
 </script>
 
@@ -54,10 +49,9 @@ function runFunction(fn: () => void) {
       <div v-if="!isModalActive" class="flex items-center justify-end gap-6">
 
         <div class="hidden md:flex items-center gap-2 " v-for="link in links" :key="link.hash">
-          <RouterLink :to="link.href" custom v-slot="{ href, navigate }">
-            <a
-                :href="href"
-                @click="runFunction(navigate)"
+          <RouterLink :to="link.href" custom>
+            <button
+                @click="onNavigate(link.href.hash,)"
                 :aria-current="isLinkActive(link.hash) ? 'page' : undefined"
                 :class="[
                 'px-3 py-2 text-m font-semibold transition-opacity',
@@ -65,7 +59,7 @@ function runFunction(fn: () => void) {
               ]"
             >
               {{ link.label }}
-            </a>
+            </button>
           </RouterLink>
         </div>
 
