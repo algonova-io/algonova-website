@@ -49,8 +49,8 @@ export default {
             },
             animation: {
                 float: 'float 2s ease-in-out infinite',
-                'slide-out-right': 'slide-out-right 1.2s ease forwards',
-                'slide-in-right': 'slide-in-right 0.9s ease forwards',
+                'slide-out-right': 'slide-out-right 0.6s ease forwards',
+                'slide-in-right': 'slide-in-right 0.6s ease forwards',
                 'slide-in-down': 'slide-in-down 2s ease forwards',
                 'slide-out-up': 'slide-out-up 2s ease forwards',
             },

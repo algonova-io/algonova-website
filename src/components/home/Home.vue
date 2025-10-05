@@ -2,27 +2,12 @@
   <div>
 
     <main >
-      <Transition
-         >
-        <Modal id="chat" v-if="chatActive" class="mt-14 overflow-y-hidden">
-          <ChatScreen key="chat" :initialMessage="draftText" />
-        </Modal>
-      </Transition>
+        <Modal id="chat"  class="mt-14 overflow-y-hidden">
+          <ChatScreen v-if="chatActive" key="chat" :initialMessage="draftText" />
+          <ContactUs  v-if="contactActive" key="contactUs" />
 
-      <Transition
-          mode="out-in"
-          enter-active-class="animate-slide-in-down"
-          leave-active-class="animate-slide-out-up"
-      >
-        <Modal id="contactUs" v-if="contactActive" class="mt-14 ">
-          <ContactUs key="contactUs" />
         </Modal>
-      </Transition>
-      <Transition
-      mode="out-in"
-      enter-active-class="animate-slide-in-down"
-      leave-active-class="animate-slide-out-up"
-      >
+
         <div v-if="!isModalActive">
           <section id="home"  class="scroll-mt-24 pt-20">
             <HeroSection key="hero" />
@@ -34,7 +19,6 @@
             <Projects />
           </section>
         </div>
-      </Transition>
 
     </main>
 

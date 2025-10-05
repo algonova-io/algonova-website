@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center overflow-auto bg-soft px-4 py-2">
+  <motion.div  class="min-h-screen flex items-center justify-center overflow-auto bg-soft px-4 py-2">
     <div class="w-full max-w-3xl bg-white rounded-2xl shadow-md p-8 overflow-auto">
       <h1 class="text-title-large text-ink mb-6 text-center">Contact Us</h1>
-      <form @submit.prevent="handleSubmit" class="space-y-4">
+      <form  @submit.prevent="handleSubmit" class="space-y-4">
           <div>
             <label for="name" class="block text-sm font-medium text-secondaryText">Name</label>
             <input
@@ -76,11 +76,12 @@
         </button>
       </form>
     </div>
-  </div>
+  </motion.div>
 </template>
 <script setup lang="ts">
 import {computed, reactive, ref, watch} from "vue";
 import {toast} from "vue-sonner";
+import {motion} from "motion-v";
 
 type ContactForm = {
   name: string
