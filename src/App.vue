@@ -3,7 +3,8 @@
 import SiteNav from './components/core/SiteNav.vue'
 import {useModalStore} from "./components/modals/composable/useModalStore";
 const {chatActive} = useModalStore()
-
+import { Toaster } from 'vue-sonner'
+import 'vue-sonner/style.css'
 
 </script>
 
@@ -23,6 +24,7 @@ const {chatActive} = useModalStore()
         <component :is="Component"/>
       </Transition>
     </RouterView>
+    <Toaster position="top-right" richColors />
   </div>
 </template>
 

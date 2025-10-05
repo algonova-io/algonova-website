@@ -13,7 +13,7 @@
           mode="out-in"
           enter-active-class="animate-slide-down"
       >
-        <Modal id="contactUs" v-if="contactActive" class="mt-14 overflow-y-hidden">
+        <Modal id="contactUs" v-if="contactActive" class="mt-14 ">
           <ContactUs key="contactUs" />
         </Modal>
       </Transition>
