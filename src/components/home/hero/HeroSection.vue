@@ -5,7 +5,8 @@ import BackgroundLogo from "../../core/BackgroundLogo.vue";
 import {ref} from "vue";
 import TypeWriter from "../TypeWriter.vue";
 import {useModalStore} from "../../modals/composable/useModalStore";
-
+import {ChatOption} from "../../../models/Chat";
+const emit = defineEmits<{ (e: 'scrollClick'): void }>()
 const {toggleChat, setData, chatActive} = useModalStore()
 
 function onSubmit(value: string) {
@@ -56,7 +57,7 @@ function onSubmit(value: string) {
 
       </div>
       <div class="absolute bottom-6 left-0 right-0  justify-center hidden md:flex">
-        <ScrollCue />
+        <ScrollCue @click="emit('scrollClick')" />
       </div>
 
     </div>

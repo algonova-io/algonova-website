@@ -19,7 +19,7 @@
       </Transition>
       <div v-if="!isModalActive">
         <section id="home"  class="scroll-mt-24 pt-20">
-          <HeroSection key="hero" />
+          <HeroSection key="hero" @scroll-click="scrollToHash('#about')" />
         </section>
         <section id="about"  class="scroll-mt-24">
           <About />
