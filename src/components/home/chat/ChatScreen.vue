@@ -9,16 +9,13 @@ import {onSnapshot, collection} from "firebase/firestore";
 import {signInAnonymously} from "firebase/auth";
 import MarkdownIt from 'markdown-it'
 import DOMPurify from 'dompurify'
+import {useModalStore} from "../../modals/composable/useModalStore";
 
 const sessionId = ref<string>();
 const messages = ref<ChatMessage[]>([])
 const isModelTyping = ref<boolean>(false)
 const md = new MarkdownIt()
-const props = withDefaults(defineProps<{
-  initialMessage: string
-}>(), {
-  initialMessage: "",
-})
+const {data} = useModalStore()
 onMounted(async () => {
   signInAnonymously(auth).then((data) => {
     console.log("Signed in as: ", data.user.uid, "")

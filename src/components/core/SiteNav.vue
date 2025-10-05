@@ -6,16 +6,11 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {RouteRecordName, useRoute, useRouter} from "vue-router";
 import {computed} from "vue";
 import {shouldObserverBeActive} from "./compasebles/useAutoScroll";
+import {useModalStore} from "../modals/composable/useModalStore";
 
-defineProps<{
-  chatActive: boolean
-}>()
-const emit = defineEmits<{
-  (e: 'close'): void
-}>()
 
 const route = useRoute();
-const router = useRouter();
+const {isModalActive, closeAll, toggleContact} = useModalStore()
 
 function toLabel(name: RouteRecordName | null | undefined) {
   if (!name) return 'Hero';
@@ -56,7 +51,7 @@ function runFunction(fn: () => void) {
       mode="out-in"
       enter-active-class="animate-slide-in-right"
       leave-active-class="animate-slide-out-right">
-      <div v-if="!chatActive" class="flex items-center justify-end gap-6">
+      <div v-if="!isModalActive" class="flex items-center justify-end gap-6">
 
         <div class="hidden md:flex items-center gap-2 " v-for="link in links" :key="link.hash">
           <RouterLink :to="link.href" custom v-slot="{ href, navigate }">
@@ -74,7 +69,7 @@ function runFunction(fn: () => void) {
           </RouterLink>
         </div>
 
-        <PrimaryButton as="a" href="#">Get in touch</PrimaryButton>
+        <PrimaryButton as="button" @click="toggleContact" >Get in touch</PrimaryButton>
       </div>
       <div v-else class="flex items-center justify-end">
         <button
@@ -82,7 +77,7 @@ function runFunction(fn: () => void) {
             class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-black/80 text-white
                    hover:bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             aria-label="Close"
-            @click="emit('close')"
+            @click="closeAll()"
         >
           <FontAwesomeIcon :icon="faXmark" class="h-4 w-4"/>
         </button>

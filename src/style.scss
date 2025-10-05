@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-$bg-image: "assets/algonova_icon_background.svg";
-$bg-image-about: "assets/background-about.svg";
+$bg-image: "assets/desktop.svg";
+$bg-image-about: "assets/background_about_page.svg";
+$bg-image-projects: "assets/background_projects_page.svg";
 $header-height: 80px;
 
 @media (max-width: 768px) {
@@ -19,20 +20,35 @@ html {
 
 body {
 background-color: #bfdbf7;
-}
-.about-background {
- background: {
-   image: url(#{$bg-image-about});
-   repeat: no-repeat;
-   size: 1000px;
- }
 
 }
+//.about-background {
+// background: {
+//   image: url(#{$bg-image-about});
+//   repeat: no-repeat;
+//   size: 1000px;
+// }
+//
+//}
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+#about {
+    background: {
+      image: url(#{$bg-image-about});
+      repeat: no-repeat;
+      size: 100%
+    }
+}
 
+#projects {
+  background: {
+    image: url(#{$bg-image-projects});
+    repeat: no-repeat;
+    size: 100%
+  }
+}
 // View transition
 ::view-transition-old(root),
 ::view-transition-new(root) {

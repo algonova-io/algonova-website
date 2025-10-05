@@ -4,13 +4,14 @@ import ScrollCue from '../../core/ScrollCue.vue'
 import BackgroundLogo from "../../core/BackgroundLogo.vue";
 import {ref} from "vue";
 import TypeWriter from "../TypeWriter.vue";
+import {useModalStore} from "../../modals/composable/useModalStore";
 
-const emit = defineEmits<{
-  (e: 'start-chat', text: string): void
-}>()
+const {toggleChat, setData, chatActive} = useModalStore()
 
 function onSubmit(value: string) {
-  emit('start-chat', value)
+    if (chatActive.value) return
+    setData(value)
+    toggleChat()
 }
 </script>
 
