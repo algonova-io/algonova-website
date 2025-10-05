@@ -10,7 +10,8 @@ const projectCards = [
     title: 'Taskaround',
     artSrc: '/src/assets/slang-to-the-moon.svg',
     description: `A hyperlocal gig marketplace app. Designed and built end to end, available on on PlayStore and AppStore`,
-    target: `https://taskaround.io/`,
+    target: `_self`,
+    href: `https://taskaround.io/`,
     projectDate: '2023-01-01',
     client: 'Taskaround',
     tags: ['android', 'ios', 'marketplace', 'MVP']
@@ -19,7 +20,8 @@ const projectCards = [
     title: 'InFit',
     artSrc: '/src/assets/slang-to-the-moon.svg',
     description: `A workout planner app, to stay on top of your health goals.`,
-    target: `https://`,
+    target: `_blank`,
+    href: `https://github.com/KenAli77/InFit/tree/master`,
     projectDate: '2023-01-01',
     client: 'Taskaround',
     tags: ['android', 'ios', 'marketplace', 'MVP']
@@ -51,6 +53,8 @@ const projectCards = [
             :client="card.client"
             :tags="card.tags"
             :description="card.description"
+            :target="card.target"
+            :href="card.href"
 
         >
         </ProjectCard>

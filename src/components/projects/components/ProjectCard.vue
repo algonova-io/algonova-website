@@ -38,8 +38,10 @@ const props = withDefaults(defineProps<ProjectCardProps>(),  {
 <template>
   <component :is="href ? 'a' : 'div'" :href="href || undefined" :target="href ? target : undefined"
              class="block w-full ">
-    <div class="relative w-full overflow-hidden"  >
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 bg-white  shadow-2xl rounded-2xl p-6 md:p-8">
+    <div class="relative w-full overflow-hidden rounded-2xl shadow-2xl"  >
+      <div
+          class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 bg-white shadow-2xl rounded-2xl p-6 md:p-8 overflow-hidden"
+      >
         <!-- Left: image / media -->
         <div class="md:col-span-5">
           <slot name="media">
@@ -84,7 +86,7 @@ const props = withDefaults(defineProps<ProjectCardProps>(),  {
               <span
                   v-for="(tag, i) in tags"
                   :key="i"
-                  class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-accent text-white text-xs font-medium px-3 py-1.5 shadow-sm hover:shadow-md transition"
+                  class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-accent text-white text-xs font-bold px-3 py-1.5 shadow-sm hover:shadow-md transition"
               >
                 {{ tag }}
               </span>
