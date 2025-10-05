@@ -13,6 +13,7 @@ watch(model, () => {
 const inputRef = ref<HTMLInputElement | null>(null)
 
 function handleSubmit(event?: Event)  {
+
   if (model.value.trim().length === 0) {
     return
   }

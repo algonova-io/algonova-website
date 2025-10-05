@@ -5,13 +5,14 @@ import {httpsCallable} from 'firebase/functions';
 import {ChatMessage} from "../../../models/Chat";
 import ProjectInput from "../../core/ProjectInput.vue";
 import {auth, db, functions} from "../../../main";
-import {onSnapshot, collection} from "firebase/firestore";
+import {onSnapshot, collection, doc} from "firebase/firestore";
 import {signInAnonymously} from "firebase/auth";
 import MarkdownIt from 'markdown-it'
 import DOMPurify from 'dompurify'
 import {useModalStore} from "../../modals/composable/useModalStore";
 
 const sessionId = ref<string>();
+const sessionActive = ref<boolean>(true);
 const messages = ref<ChatMessage[]>([])
 const isModelTyping = ref<boolean>(false)
 const md = new MarkdownIt()
@@ -21,6 +22,13 @@ onMounted(async () => {
     console.log("Signed in as: ", data.user.uid, "")
     sessionId.value = data.user.uid;
 
+    onSnapshot(doc(db, `chats/${sessionId.value}`), (data) => {
+      if (data.data()?.completed) {
+        console.log("Chat closed")
+        sessionActive.value = false;
+        return
+      }
+    })
     onSnapshot(collection(db, `chats/${sessionId.value}/messages`), (data) => {
           const update = data.docs.map((doc) => {
             return doc.data() as ChatMessage
@@ -38,6 +46,10 @@ onMounted(async () => {
 })
 
 async function handleSubmit(text: string) {
+  if (!sessionActive.value) {
+    return
+  }
+
   isModelTyping.value = true;
 
   const sendMessage = httpsCallable(functions, "chat", {})
@@ -58,13 +70,14 @@ async function handleSubmit(text: string) {
     // update the UI every time a new chunk is received
     // from the callable function
     const message = messageChunk as any
-    if(!message.content)
+    if (!message.content)
       continue;
     updateUi(message.content, responseId);
   }
   isModelTyping.value = false;
 
 }
+
 function toText(content: unknown): string {
   if (Array.isArray(content)) {
     // Genkit Part[]—concatenate text parts; adjust if you store multiple parts
@@ -113,7 +126,7 @@ function updateUi(messageChunk: string, messageId: string) {
       <!--      </div>-->
 
       <!-- Spacer pushes composer down -->
-<!--      <div class="flex-1"></div>-->
+      <!--      <div class="flex-1"></div>-->
 
       <!-- Composer -->
       <div class="pb-10  sticky bottom-0 z-20 -mx-6 px-6 pt-3
