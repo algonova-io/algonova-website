@@ -1,13 +1,17 @@
 <template>
   <div>
-
-    <main >
-        <Modal id="chat"  class="mt-14 overflow-y-hidden">
+    <main>
+        <Modal v-if="isModalActive" id="chat"  class="mt-14 overflow-y-hidden">
           <ChatScreen v-if="chatActive" key="chat" :initialMessage="draftText" />
-          <ContactUs  v-if="contactActive" key="contactUs" />
+          <motion.div       :initial='{ transform: "translateY(-100px)" }'
+                            :animate='{ transform: "translateY(0px)" }'
 
+                            :transition='{ type: "spring" }'
+          >
+            <ContactUs  v-if="contactActive" key="contactUs" />
+
+          </motion.div>
         </Modal>
-
         <div v-if="!isModalActive">
           <section id="home"  class="scroll-mt-24 pt-20">
             <HeroSection key="hero" />
@@ -19,7 +23,6 @@
             <Projects />
           </section>
         </div>
-
     </main>
 
     <!-- FAB is fixed; render only when chat is NOT open -->
@@ -41,6 +44,7 @@ import Modal from "../modals/modal.vue";
 import ContactUs from "../modals/contact-us/contactUs.vue";
 import {useModalStore} from "../modals/composable/useModalStore";
 import {useScrollHandler} from "../core/compasebles/scrollHandler";
+import {motion} from "motion-v";
 
 const {chatActive, contactActive, isModalActive} = useModalStore()
 const draftText = ref('')

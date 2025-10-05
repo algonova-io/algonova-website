@@ -38,7 +38,7 @@ html {
     background: {
       image: url(#{$bg-image-about});
       repeat: no-repeat;
-      size: 100%
+      size: cover;
     }
 }
 

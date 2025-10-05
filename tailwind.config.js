@@ -7,7 +7,7 @@ export default {
                 accent: '#F2545B',
                 ink: '#101010',
                 secondaryText: '#3D3D3D',
-                soft: '#f4f4f9',
+                soft: '#f8f9fa',
             },
             fontFamily: {
                 suse: ['"SUSE"', 'ui-sans-serif', 'system-ui', 'sans-serif'],

@@ -8,22 +8,20 @@ const infitColor = '#005D7E'
 const projectCards = [
   {
     title: 'Taskaround',
-    artSrc: '/src/assets/slang-to-the-moon.svg',
+    artSrc: '/src/assets/taskaround_mark.svg',
     description: `A hyperlocal gig marketplace app. Designed and built end to end, available on on PlayStore and AppStore`,
-    target: `_self`,
     href: `https://taskaround.io/`,
-    projectDate: '2023-01-01',
+    projectDate: '2025-07',
     client: 'Taskaround',
     tags: ['android', 'ios', 'marketplace', 'MVP']
   },
   {
     title: 'InFit',
-    artSrc: '/src/assets/slang-to-the-moon.svg',
+    artSrc: '/src/assets/InFit.svg',
     description: `A workout planner app, to stay on top of your health goals.`,
-    target: `_blank`,
     href: `https://github.com/KenAli77/InFit/tree/master`,
-    projectDate: '2023-01-01',
-    client: 'Taskaround',
+    projectDate: '2023-05',
+    client: 'InFit',
     tags: ['android', 'ios', 'marketplace', 'MVP']
   },
 ]
@@ -53,7 +51,6 @@ const projectCards = [
             :client="card.client"
             :tags="card.tags"
             :description="card.description"
-            :target="card.target"
             :href="card.href"
 
         >
