@@ -28,7 +28,7 @@ watch(() => props.messages.length, scrollToBottom)
 </script>
 
 <template>
-  <div ref="scrollerRef" class="relative w-full overflow-y-auto">
+  <div ref="scrollerRef" class="relative w-full h-full overflow-y-auto">
     <div class="space-y-4">
       <ChatBubble
           v-for="m in messages"

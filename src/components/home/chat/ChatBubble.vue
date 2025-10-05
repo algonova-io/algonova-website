@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import {Role} from "../../../models/Chat";
 import MarkdownIt from "markdown-it";
 import DOMPurify from "dompurify";
+import { motion } from "motion-v"
 
 const props = withDefaults(defineProps<{
   sender: Role
@@ -40,7 +41,7 @@ const rendered = computed(() => {
 </script>
 
 <template>
-  <div class="w-full">
+  <motion.div class="w-full">
     <div :class="['flex', rowJustify]" >
       <div
           :role="ariaRole"
@@ -50,5 +51,5 @@ const rendered = computed(() => {
       >
       </div>
     </div>
-  </div>
+  </motion.div>
 </template>
