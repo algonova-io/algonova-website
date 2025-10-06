@@ -15,7 +15,7 @@ const props = defineProps<Props>()
     <div class="grid-cols-12 grid gap-6 justify-start items-center">
       <div class="col-span-4">
         <figure class="relative  aspect-square w-full h-full ">
-          <v-img
+          <img
               :src="photo"
               :alt="alt || name"
               class="object-cover rounded-full w-full h-full"

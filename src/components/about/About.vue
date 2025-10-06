@@ -14,28 +14,28 @@ type Feature = {
 
 const features: Feature[] = [
   {
-    icon: '/assets/craft.svg',
+    icon: 'assets/craft.svg',
     title: 'End to end craft',
     body:
         'Product, design, mobile & cloud handled by one accountable expert.',
     alt: 'Craft icon'
   },
   {
-    icon: '/assets/empathy.svg',
+    icon: 'assets/empathy.svg',
     title: 'Founder empathy',
     body:
         'We think like owners and optimize for learning and traction.',
     alt: 'Empathy icon'
   },
   {
-    icon: '/assets/shipping.svg',
+    icon: 'assets/shipping.svg',
     title: 'Bias for shipping',
     body:
         'Lean cycles, tight feedback, visible progress every week.',
     alt: 'Shipping icon'
   },
   {
-    icon: '/assets/growth.svg',
+    icon: 'assets/growth.svg',
     title: 'Built to grow',
     body:
         'Clean architecture, scalable infrastructure, maintainable code.',
