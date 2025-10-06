@@ -3,9 +3,8 @@ import LogoMark from './LogoMark.vue'
 import PrimaryButton from './PrimaryButton.vue'
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import { useRoute, useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {computed} from "vue";
-import {shouldObserverBeActive} from "./compasebles/useAutoScroll";
 import {useModalStore} from "../modals/composable/useModalStore";
 import {useScrollHandler} from "./compasebles/scrollHandler";
 
@@ -54,9 +53,9 @@ function onNavigate(href: string) {
                 @click="onNavigate(link.href.hash,)"
                 :aria-current="isLinkActive(link.hash) ? 'page' : undefined"
                 :class="[
-                'px-3 py-2 text-m font-semibold transition-opacity',
-                isLinkActive(link.hash) ? 'text-ink' : 'text-ink/60 hover:text-ink'
-              ]"
+
+                'px-3 py-2 text-body-medium font-semibold transition-opacity',
+                isLinkActive(link.hash) ? 'text-ink' : 'text-ink/60 hover:text-ink'    ]"
             >
               {{ link.label }}
             </button>

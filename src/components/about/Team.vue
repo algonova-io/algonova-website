@@ -17,7 +17,7 @@ const members: Member[] = [
     photo: '/src/assets/6.png',
     name: 'Kenidiid',
     role: 'Product Engineer',
-    quote: "If it doesn’t feel good to use, it’s not finished",
+    quote: "If it doesn’t feel good to use, it’s not worth doing.",
     bio: `Kenidiid is our Product Engineer. Over his career, he’s helped multiple small companies bring new
 products to life from the ground up. Entirely self-taught and an entrepreneur at heart, he not only codes
 and designs but also drives the business side — from winning clients to shaping the vision. He cares deeply
@@ -29,7 +29,7 @@ joys in an interaction, Kenidiid is driven by creating products that delight as 
     photo: '/src/assets/7.png',
     name: 'Vitalii',
     role: 'Software Engineer',
-    quote: 'I am very gay.',
+    quote: 'Challenges are what make building interesting.',
     bio: `Vitalii is our Software Engineer. He’s worked on technically demanding projects across multiple domains —
 from Augmented Reality applications to video conferencing platforms and beyond. Analytical by nature, he approaches
 problems with precision and curiosity, a trait that once earned him top honors in math olympiads back home in Ukraine.

@@ -13,7 +13,7 @@ const props = defineProps<Props>()
       class="group rounded-lg bg-white py-4 px-6 h-full"
   >
     <div class="flex flex-col justify-center items-center gap-4">
-      <img
+      <v-img
           :src="icon"
           :alt="alt || title"
           class="size-10 shrink-0 md:size-12"
