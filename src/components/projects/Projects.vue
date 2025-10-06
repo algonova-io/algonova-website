@@ -8,7 +8,7 @@ const infitColor = '#005D7E'
 const projectCards = [
   {
     title: 'Taskaround',
-    artSrc: '/src/assets/taskaround_mark.svg',
+    artSrc: '/assets/taskaround_mark.svg',
     description: `A hyperlocal gig marketplace app. Designed and built end to end, available on on PlayStore and AppStore`,
     href: `https://taskaround.io/`,
     projectDate: '2025-07',
@@ -17,7 +17,7 @@ const projectCards = [
   },
   {
     title: 'InFit',
-    artSrc: '/src/assets/InFit.svg',
+    artSrc: '/assets/InFit.svg',
     description: `A workout planner app, to stay on top of your health goals.`,
     href: `https://github.com/KenAli77/InFit/tree/master`,
     projectDate: '2023-05',
